@@ -12,12 +12,18 @@ public class SpringMockExam {
         String text;
         List<String> options;
         Set<Integer> correctIndexes; // 0-based: 0 = A, 1 = B, ecc.
+        String explanation;
 
         Question(String id, String text, List<String> options, Set<Integer> correctIndexes) {
+            this(id, text, options, correctIndexes, null);
+        }
+
+        Question(String id, String text, List<String> options, Set<Integer> correctIndexes, String explanation) {
             this.id = id;
             this.text = text;
             this.options = options;
             this.correctIndexes = correctIndexes;
+            this.explanation = explanation;
         }
 
         boolean isMultipleChoice() {
@@ -68,10 +74,10 @@ public class SpringMockExam {
 
             boolean correct = answerIndexes.equals(q.correctIndexes);
             if (correct) {
-                System.out.println("✅ Corretto!");
+                System.out.println("✅ Corretto!" + formatExplanation(q));
                 correctCount++;
             } else {
-                System.out.println("❌ Sbagliato.");
+                System.out.println("❌ Sbagliato." + formatExplanation(q));
                 System.out.print("   Risposta corretta: ");
                 printCorrectAnswers(q);
                 wrongCount++;
@@ -316,6 +322,13 @@ public class SpringMockExam {
         System.out.println(String.join(",", letters));
     }
 
+    private static String formatExplanation(Question q) {
+        if (q.explanation == null || q.explanation.isBlank()) {
+            return "";
+        }
+        return " " + q.explanation;
+    }
+
     private static Set<Integer> parseAnswerLetters(String input, int optionCount) {
         if (optionCount <= 0) {
             throw new IllegalArgumentException("nessuna opzione disponibile");
@@ -357,6 +370,7 @@ public class SpringMockExam {
         String id = null;
         String text = null;
         String correctRaw = null;
+        String explanation = null;
         List<String> options = new ArrayList<>();
         int lineNumber = 0;
 
@@ -364,11 +378,12 @@ public class SpringMockExam {
             lineNumber++;
             String trimmed = line.trim();
             if (trimmed.isEmpty()) {
-                if (id != null || text != null || !options.isEmpty() || correctRaw != null) {
-                    result.add(buildQuestionFromBlock(id, text, options, correctRaw, file, lineNumber));
+                if (id != null || text != null || !options.isEmpty() || correctRaw != null || explanation != null) {
+                    result.add(buildQuestionFromBlock(id, text, options, correctRaw, explanation, file, lineNumber));
                     id = null;
                     text = null;
                     correctRaw = null;
+                    explanation = null;
                     options = new ArrayList<>();
                 }
                 continue;
@@ -399,21 +414,23 @@ public class SpringMockExam {
                     }
                 }
                 case "correct" -> correctRaw = value;
+                case "answer" -> explanation = value;
                 default -> {
                     // ignora chiavi sconosciute
                 }
             }
         }
 
-        if (id != null || text != null || !options.isEmpty() || correctRaw != null) {
-            result.add(buildQuestionFromBlock(id, text, options, correctRaw, file, lineNumber));
+        if (id != null || text != null || !options.isEmpty() || correctRaw != null || explanation != null) {
+            result.add(buildQuestionFromBlock(id, text, options, correctRaw, explanation, file, lineNumber));
         }
 
         return result;
     }
 
     private static Question buildQuestionFromBlock(String id, String text, List<String> options,
-                                                   String correctRaw, Path file, int lineNumber) throws IOException {
+                                                   String correctRaw, String explanation,
+                                                   Path file, int lineNumber) throws IOException {
         if (id == null || text == null || options.isEmpty() || correctRaw == null) {
             throw new IOException("Blocco incompleto nel file " + file + " vicino alla riga " + lineNumber);
         }
@@ -423,7 +440,7 @@ public class SpringMockExam {
         } catch (IllegalArgumentException ex) {
             throw new IOException("Risposte corrette non valide per la domanda " + id + ": " + ex.getMessage(), ex);
         }
-        return new Question(id, text, List.copyOf(options), correctIndexes);
+        return new Question(id, text, List.copyOf(options), correctIndexes, explanation);
     }
 
     private static String stripOptionPrefix(String value) {

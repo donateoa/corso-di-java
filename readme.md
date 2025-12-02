@@ -30,5 +30,6 @@ option:Risposta A
 option:Risposta B
 option:Risposta C
 correct:A
+answer:Spiega brevemente perché la risposta è corretta (opzionale).
 ```
 Puoi indicare più risposte corrette con `correct:A,C`. Separa i blocchi con una riga vuota. Le righe che iniziano con `#` sono commenti.
