@@ -1,0 +1,646 @@
+# Test "corso1" - 80 domande mock Spring Certification
+# Formato:
+# id:<id>
+# text:<domanda>
+# option:<opzione>   (ripetere per ogni opzione)
+# correct:<lettere>  (A oppure A,C)
+
+id:Q1
+text:Quale annotazione combina @Controller e @ResponseBody restituendo JSON/XML di default?
+option:@RestController
+option:@Controller
+option:@Component
+option:@Service
+correct:A
+
+id:Q2
+text:Quale endpoint Actuator è rischioso esporre pubblicamente senza autenticazione?
+option:/info
+option:/health
+option:/env
+option:/beans
+correct:C,D
+
+id:Q3
+text:Qual è la classe di default per JSON in Spring Boot?
+option:GsonParser
+option:Jackson ObjectMapper
+option:JsonReader
+option:JsonMarshaller
+correct:B
+
+id:Q4
+text:Quale annotazione definisce una classe di configurazione in Spring?
+option:@Configuration
+option:@Bean
+option:@Component
+option:@Config
+correct:A
+
+id:Q5
+text:Quale annotazione abilita la scansione dei componenti?
+option:@EnableScan
+option:@ComponentScan
+option:@ScanComponents
+option:@SpringScan
+correct:B
+
+id:Q6
+text:Quali sono i due tipi principali di reactive publishers in Spring WebFlux?
+option:Mono e Flux
+option:Observable e Flowable
+option:Stream e CompletableFuture
+option:Promise e Task
+correct:A
+
+id:Q7
+text:Quale bean viene creato in un Feign Client personalizzato?
+option:FeignDecoder
+option:FeignClient
+option:RestClient
+option:WebClient
+correct:A
+
+id:Q8
+text:Cosa indica @Bean?
+option:Definisce un bean gestito dal container
+option:Registra un controller
+option:Definisce un repository
+option:Crea un thread
+correct:A
+
+id:Q9
+text:Quale annotazione viene usata per gestire transazioni in Spring?
+option:@Transactional
+option:@Transactions
+option:@EnableTx
+option:@EnableDatabase
+correct:A
+
+id:Q10
+text:In Spring Boot 3.x è obbligatorio l’uso dei package Jakarta?
+option:Sì
+option:No
+option:Solo per WebFlux
+option:Solo nei test
+correct:A
+
+id:Q11
+text:Quale livello di logging registra solo errori?
+option:ERROR
+option:WARN
+option:INFO
+option:DEBUG
+correct:A
+
+id:Q12
+text:Cosa fa @Autowired?
+option:Effettua dependency injection automatica
+option:Registra un bean
+option:Crea un proxy
+option:Crea un nuovo contesto Spring
+correct:A
+
+id:Q13
+text:Quale è un vantaggio dell’uso di constructor injection?
+option:Immutabilità e testabilità
+option:Richiede XML
+option:È più lento
+option:Evita il ciclo di vita del bean
+correct:A
+
+id:Q14
+text:Quale oggetto permette di accedere agli argomenti del metodo in AOP?
+option:JoinPoint
+option:Interceptor
+option:Advice
+option:TargetPoint
+correct:A
+
+id:Q15
+text:Quale comando avvia un'applicazione Spring Boot?
+option:mvn spring-boot:run
+option:mvn run
+option:mvn start
+option:mvn exec
+correct:A
+
+id:Q16
+text:Quale annotazione abilita i Feign Client?
+option:@EnableFeignClients
+option:@EnableFeign
+option:@EnableClients
+option:@FeignEnable
+correct:A
+
+id:Q17
+text:Qual è il server web embedded di default in Spring Boot?
+option:Tomcat
+option:Jetty
+option:Netty
+option:Grizzly
+correct:A
+
+id:Q18
+text:Quale dipendenza abilita Actuator?
+option:spring-boot-starter-actuator
+option:spring-boot-starter-monitor
+option:spring-boot-starter-admin
+option:spring-boot-starter-health
+correct:A
+
+id:Q19
+text:Quale validazione si usa per indicare un campo obbligatorio?
+option:@NotNull
+option:@Required
+option:@Mandatory
+option:@NonEmpty
+correct:A
+
+id:Q20
+text:Quale annotazione espone un endpoint REST?
+option:@GetMapping
+option:@RestMapping
+option:@MappingGet
+option:@Request
+correct:A
+
+id:Q21
+text:Quale annotazione abilita la configurazione asincrona?
+option:@EnableAsync
+option:@AsyncEnabled
+option:@AsyncConfig
+option:@EnableThreading
+correct:A
+
+id:Q22
+text:Quale interfaccia viene implementata da un custom HealthIndicator?
+option:HealthIndicator
+option:Indicator
+option:StatusProvider
+option:HealthProvider
+correct:A
+
+id:Q23
+text:Cosa produce un bean singleton?
+option:Una sola istanza per contesto
+option:Un nuovo bean a ogni richiesta
+option:Un bean per thread
+option:Un bean per sessione
+correct:A
+
+id:Q24
+text:Cosa fa @Primary?
+option:Indica quale bean usare in caso di conflitto
+option:Rende immutabile il bean
+option:Rende thread-safe il bean
+option:Registra un bean come lazy
+correct:A
+
+id:Q25
+text:Cosa fa @ConditionalOnMissingBean?
+option:Registra un bean solo se assente
+option:Rimuove i bean duplicati
+option:Override dei bean per default
+option:Blocca l’avvio del contesto
+correct:A
+
+id:Q26
+text:Quali endpoint Actuator contengono informazioni sensibili?
+option:/env
+option:/beans
+option:/conditions
+option:All
+correct:A,B
+
+id:Q27
+text:Qual è la signature di un SecurityFilterChain?
+option:SecurityFilterChain filterChain(HttpSecurity http)
+option:Security filterChain(HttpSecurity http)
+option:HttpSecurity chain()
+option:SecurityChain build()
+correct:A
+
+id:Q28
+text:Quale filtro è sempre il primo nella chain Spring Security?
+option:WebAsyncManagerIntegrationFilter
+option:UsernamePasswordAuthenticationFilter
+option:CsrfFilter
+option:RequestCacheFilter
+correct:A
+
+id:Q29
+text:Cosa fa WebFlux?
+option:Gestisce richieste in modo reattivo non bloccante
+option:Gestisce thread blocking
+option:È un wrapper di Servlet 5
+option:Serve solo per websocket
+correct:A
+
+id:Q30
+text:Quale repository pattern usa Spring Data JPA?
+option:CrudRepository
+option:MongoRepository
+option:JdbcRepository
+option:Neo4jRepository
+correct:A
+
+id:Q31
+text:Come si abilita caching?
+option:@EnableCaching
+option:@CacheableEnable
+option:@EnableCache
+option:@CachingOn
+correct:A
+
+id:Q32
+text:@Cacheable cosa fa?
+option:Memorizza il risultato di un metodo
+option:Annulla la cache
+option:Logga le chiamate
+option:Abilita la sicurezza
+correct:A
+
+id:Q33
+text:Quale annotation invalida la cache?
+option:@CacheEvict
+option:@CacheRemove
+option:@CacheInvalidate
+option:@CacheClear
+correct:A
+
+id:Q34
+text:Quale annotation mappa un path su un controller?
+option:@RequestMapping
+option:@RestMapping
+option:@MapPath
+option:@Route
+correct:A
+
+id:Q35
+text:Spring Boot Actuator espone lo stato dell'applicazione tramite:
+option:HealthEndpoint
+option:StatusController
+option:PingController
+option:InfoFilter
+correct:A
+
+id:Q36
+text:Cosa indica un bean prototype?
+option:Una nuova istanza ogni volta
+option:Una sola istanza
+option:Una istanza per sessione
+option:Una istanza per thread
+correct:A
+
+id:Q37
+text:Come si abilita JPA?
+option:@EnableJpaRepositories
+option:@EnableJPA
+option:@Jpa
+option:@EnableHibernate
+correct:A
+
+id:Q38
+text:Quale libreria usa Spring per JSON?
+option:Jackson
+option:Gson
+option:FastJson
+option:JsonSmart
+correct:A
+
+id:Q39
+text:Quali sono i due principi chiave di Spring?
+option:IoC e DI
+option:REST e SOAP
+option:Servlet e JSP
+option:Threads e Locks
+correct:A
+
+id:Q40
+text:Cosa è un ApplicationContext?
+option:Il container IoC di Spring
+option:Un logger
+option:Un thread pool
+option:Un proxy
+correct:A
+
+id:Q41
+text:Quale è un tipico errore se due bean hanno lo stesso nome?
+option:NoSuchBeanDefinitionException
+option:DuplicateBeanException
+option:BeanConflictException
+option:IllegalStateException
+correct:A
+
+id:Q42
+text:Quale annotation definisce un filtro globale di eccezioni?
+option:@ControllerAdvice
+option:@RestException
+option:@ExceptionManager
+option:@AdviceHandler
+correct:A
+
+id:Q43
+text:Cosa fa @ExceptionHandler?
+option:Gestisce un tipo di eccezione specifico
+option:Registra un controller
+option:Abilita logging
+option:Crea un bean
+correct:A
+
+id:Q44
+text:In un Feign Client, cosa fa fallbackFactory?
+option:Crea fallback dinamici
+option:Gestisce i timeout
+option:Gestisce le metriche
+option:Abilita circuit breaking
+correct:A
+
+id:Q45
+text:Cosa è uno scope request?
+option:Un bean creato per ogni richiesta HTTP
+option:Un bean condiviso
+option:Un bean per thread
+option:Un bean singleton
+correct:A
+
+id:Q46
+text:Quale dependency abilita Web?
+option:spring-boot-starter-web
+option:spring-boot-starter-reactive
+option:spring-boot-starter-data
+option:spring-boot-starter-db
+correct:A
+
+id:Q47
+text:Quale protocollo usa WebFlux in modalità non servlet?
+option:Netty
+option:Tomcat
+option:Jetty
+option:Grizzly
+correct:A
+
+id:Q48
+text:Cosa abilita @EnableScheduling?
+option:Task schedulati
+option:Cache
+option:Logging
+option:Profilazione
+correct:A
+
+id:Q49
+text:Quale annotation definisce un job schedulato?
+option:@Scheduled
+option:@Timing
+option:@Job
+option:@CronTask
+correct:A
+
+id:Q50
+text:Quale annotazione permette injection di valori da application.properties?
+option:@Value
+option:@InjectValue
+option:@Property
+option:@ConfigProperty
+correct:A
+
+id:Q51
+text:Quale formato di configurazione è supportato nativamente?
+option:properties e yaml
+option:xml
+option:ini
+option:toml
+correct:A
+
+id:Q52
+text:Quale annotation abilita configurazione basata sui record?
+option:@ConfigurationProperties
+option:@RecordConfig
+option:@Props
+option:@Settings
+correct:A
+
+id:Q53
+text:Cosa indica @EnableWebFlux?
+option:Abilita il runtime WebFlux
+option:Abilita servlet
+option:Abilita MVC
+option:Abilita Actuator
+correct:A
+
+id:Q54
+text:Quale tipo di proxy usa default Spring AOP?
+option:JDK Proxy
+option:Cglib
+option:ByteBuddy
+option:Javassist
+correct:A
+
+id:Q55
+text:Cosa è un BeanFactory?
+option:Interfaccia base per la gestione dei bean
+option:Un logger
+option:Un thread pool
+option:Un filtro
+correct:A
+
+id:Q56
+text:Quale annotation abilita il profilo attivo?
+option:@Profile
+option:@Env
+option:@Environment
+option:@Active
+correct:A
+
+id:Q57
+text:Cosa fa @Lazy?
+option:Ritarda la creazione del bean
+option:Rende più veloce Avvio
+option:Rende immutabile il bean
+option:Crea più istanze
+correct:A
+
+id:Q58
+text:Quale annotation consente di definire un metodo iniziale?
+option:@PostConstruct
+option:@Init
+option:@Start
+option:@Initialize
+correct:A
+
+id:Q59
+text:Cosa fa @DeleteMapping?
+option:Gestisce DELETE
+option:Gestisce PUT
+option:Gestisce PATCH
+option:Gestisce POST
+correct:A
+
+id:Q60
+text:Cosa significa CSRF?
+option:Cross-Site Request Forgery
+option:Cross Script Request Filter
+option:Cross System Recovery Function
+option:Central Security Routing Function
+correct:A
+
+id:Q61
+text:Cosa fa un PasswordEncoder?
+option:Hashing della password
+option:Memorizzazione
+option:Log
+option:Trim della password
+correct:A
+
+id:Q62
+text:Cosa fa BCrypt?
+option:Hash sicuro per password
+option:Cripta file
+option:Compress file
+option:Genera token JWT
+correct:A
+
+id:Q63
+text:Quale endpoint Actuator mostra le autoconfigurazioni attive?
+option:/actuator/conditions
+option:/actuator/env
+option:/actuator/health
+option:/actuator/info
+correct:A
+
+id:Q64
+text:Cosa fa @RefreshScope?
+option:Ricarica i bean su refresh config
+option:Ricarica logging
+option:Ricarica database
+option:Ricarica metrics
+correct:A
+
+id:Q65
+text:Quale annotation abilita Spring Cloud Config client?
+option:@EnableConfigServer
+option:@EnableConfigClient
+option:@EnableConfiguration
+option:@ClientConfig
+correct:A
+
+id:Q66
+text:Quale dependency abilita WebFlux?
+option:spring-boot-starter-webflux
+option:spring-boot-starter-reactive
+option:spring-boot-starter-web
+option:spring-boot-starter-netty
+correct:A
+
+id:Q67
+text:Quale classe gestisce le richieste non bloccanti?
+option:WebClient
+option:RestTemplate
+option:HttpClient
+option:AsyncRest
+correct:A
+
+id:Q68
+text:Cosa indica retryable?
+option:Ritenta una chiamata fallita
+option:Fa caching
+option:Logga errori
+option:Previene chiamate parallele
+correct:A
+
+id:Q69
+text:Quale annotazione abilita retry?
+option:@EnableRetry
+option:@Retry
+option:@Retryable
+option:@RetryBean
+correct:A
+
+id:Q70
+text:Cosa fa @ControllerAdvice?
+option:Gestisce eccezioni globali
+option:Abilita CORS
+option:Abilita async
+option:Abilita MVC
+correct:A
+
+id:Q71
+text:Quale è il default port di Tomcat?
+option:8080
+option:80
+option:8888
+option:9090
+correct:A
+
+id:Q72
+text:Quale file definisce le proprietà Spring?
+option:application.properties
+option:spring.properties
+option:config.yaml
+option:settings.ini
+correct:A
+
+id:Q73
+text:Quale annotazione abilita validation?
+option:@Validated
+option:@Validable
+option:@EnableValidation
+option:@EnableRules
+correct:A
+
+id:Q74
+text:Cosa fa @Valid?
+option:Applica validazione al DTO
+option:Logga DTO
+option:Codifica DTO
+option:Serializza DTO
+correct:A
+
+id:Q75
+text:Cosa fa @Repository?
+option:Gestisce eccezioni di persistenza
+option:Crea controller
+option:Crea servizio
+option:Crea bean singleton
+correct:A
+
+id:Q76
+text:Quale eccezione indica un problema di bean assente?
+option:NoSuchBeanDefinitionException
+option:NoSuchControllerException
+option:MissingFactoryException
+option:EmptyContextException
+correct:A
+
+id:Q77
+text:Quale annotation abilita Spring Boot Admin Client?
+option:@EnableAdminClient
+option:@EnableSpringAdmin
+option:@SpringBootAdmin
+option:@AdminClient
+correct:A
+
+id:Q78
+text:Quale tipo di proxy è richiesto per advice sulle classi concrete?
+option:CGLIB
+option:JDK
+option:Bytecode
+option:Static
+correct:A
+
+id:Q79
+text:Quale annotation abilita OpenAPI?
+option:@OpenAPIDefinition
+option:@SwaggerConfig
+option:@Api
+option:@Doc
+correct:A
+
+id:Q80
+text:Quale è la porta predefinita per Actuator?
+option:8080 (con prefisso /actuator)
+option:9090
+option:80
+option:None
+correct:A
