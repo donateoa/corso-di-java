@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.*;
 
 public class SpringMockExam {
@@ -53,10 +54,14 @@ public class SpringMockExam {
             questions = buildQuestions();
         }
 
+        // Ordina le domande in modo casuale ad ogni esecuzione
+        Collections.shuffle(questions, new Random());
+
         Scanner scanner = new Scanner(System.in);
         int total = questions.size();
         int correctCount = 0;
         int wrongCount = 0;
+        long quizStartNanos = System.nanoTime();
 
         System.out.println("=== Spring Certification Mock Exam ===");
         System.out.println("Domande su Spring Core, Spring Boot 2.7 e 3.x");
@@ -87,6 +92,8 @@ public class SpringMockExam {
             double percentage = answered == 0 ? 0.0 : (correctCount * 100.0 / answered);
             System.out.printf("   Progresso: %d giuste, %d sbagliate, %.1f%% corrette%n",
                     correctCount, wrongCount, percentage);
+            Duration elapsed = Duration.ofNanos(System.nanoTime() - quizStartNanos);
+            System.out.println("   Tempo totale trascorso: " + formatDuration(elapsed));
             System.out.println("----------------------------------------\n");
 
             index++;
@@ -327,6 +334,17 @@ public class SpringMockExam {
             return "";
         }
         return " " + q.explanation;
+    }
+
+    private static String formatDuration(Duration duration) {
+        long seconds = Math.max(0, duration.getSeconds());
+        long hours = seconds / 3600;
+        long minutes = (seconds % 3600) / 60;
+        long remainingSeconds = seconds % 60;
+        if (hours > 0) {
+            return String.format("%02d:%02d:%02d", hours, minutes, remainingSeconds);
+        }
+        return String.format("%02d:%02d", minutes, remainingSeconds);
     }
 
     private static Set<Integer> parseAnswerLetters(String input, int optionCount) {
