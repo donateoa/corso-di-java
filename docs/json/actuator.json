@@ -1,0 +1,150 @@
+{
+  "test": "actuator",
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "Quale dipendenza abilita gli endpoint di Spring Boot Actuator?",
+      "options": [
+        "spring-boot-starter-actuator",
+        "spring-boot-starter-web",
+        "spring-boot-starter-security",
+        "spring-boot-starter-data-jpa"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Aggiungendo lo starter actuator vengono registrati gli endpoint di monitoraggio/gestione."
+    },
+    {
+      "id": "Q2",
+      "text": "Cosa serve per rendere accessibile via HTTP /actuator/metrics? (risposta multipla)",
+      "options": [
+        "Aggiungere la dipendenza spring-boot-starter-actuator",
+        "Includere metrics in management.endpoints.web.exposure.include",
+        "Abilitare server.ssl.key-store",
+        "Usare @EnableMetrics su una classe di configurazione"
+      ],
+      "correct": [
+        "A",
+        "B"
+      ],
+      "answer": "Servono lo starter actuator e l’esposizione web dell’endpoint; le altre opzioni non sono necessarie."
+    },
+    {
+      "id": "Q3",
+      "text": "Qual è il base path predefinito per gli endpoint Actuator esposti via web?",
+      "options": [
+        "/manage",
+        "/actuator",
+        "/admin",
+        "/api/actuator"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "Per default gli endpoint sono raggiungibili sotto /actuator (es. /actuator/health)."
+    },
+    {
+      "id": "Q4",
+      "text": "Qual è l’endpoint consigliato per la readiness probe in Kubernetes?",
+      "options": [
+        "/actuator/ready",
+        "/actuator/health/readiness",
+        "/actuator/health/ready",
+        "/actuator/readiness"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "Abilitando le probe, Spring espone /actuator/health/readiness per indicare se il pod può ricevere traffico."
+    },
+    {
+      "id": "Q5",
+      "text": "Quali endpoint Actuator possono rivelare informazioni sensibili e vanno protetti o disabilitati? (risposta multipla)",
+      "options": [
+        "/actuator/env",
+        "/actuator/beans",
+        "/actuator/heapdump",
+        "/actuator/health/liveness"
+      ],
+      "correct": [
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": "/env, /beans e /heapdump espongono dettagli su configurazione e JVM; vanno protetti con auth o disabilitati."
+    },
+    {
+      "id": "Q6",
+      "text": "Quale property imposti per esporre Actuator su una porta diversa da quella applicativa?",
+      "options": [
+        "server.management.port",
+        "management.server.port",
+        "management.port",
+        "server.actuator.port"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "management.server.port sposta gli endpoint di management su una porta dedicata."
+    },
+    {
+      "id": "Q7",
+      "text": "Quali misure di sicurezza sono raccomandate per gli endpoint Actuator esposti in produzione?",
+      "options": [
+        "Esporre solo gli endpoint strettamente necessari",
+        "Proteggerli con autenticazione e autorizzazione",
+        "Isolarli tramite rete separata o VPN",
+        "Tutte le precedenti"
+      ],
+      "correct": [
+        "D"
+      ],
+      "answer": "A, B e C sono tutte best practice per ridurre il rischio; D è quindi la scelta corretta."
+    },
+    {
+      "id": "Q8",
+      "text": "Quale libreria usa Actuator per gestire metriche e integrazioni con sistemi esterni?",
+      "options": [
+        "Micrometer",
+        "SLF4J",
+        "Logback",
+        "Hibernate Metrics"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Actuator delega a Micrometer la raccolta e l’esposizione delle metriche verso backend come Prometheus o Datadog."
+    },
+    {
+      "id": "Q9",
+      "text": "Come puoi aggiungere tag personalizzati alle metriche? (risposta multipla)",
+      "options": [
+        "Usando MeterRegistry.counter(...).tag(\\\"chiave\\\",\\\"valore\\\")",
+        "Con @Timed(extraTags = {\\\"chiave\\\",\\\"valore\\\"}) su un metodo",
+        "Impostando management.metrics.tags.<nome>=<valore> nelle properties",
+        "Abilitando il livello di log DEBUG su org.springframework.boot.actuate"
+      ],
+      "correct": [
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": "Si possono aggiungere tag via codice con MeterRegistry, tramite @Timed o via configurazione; il logging non aggiunge tag."
+    },
+    {
+      "id": "Q10",
+      "text": "Quale endpoint restituisce le informazioni di versione/build se configurate?",
+      "options": [
+        "/actuator/metadata",
+        "/actuator/info",
+        "/actuator/build",
+        "/actuator/version"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "/actuator/info mostra dati come versione e build se popolati (es. con info.build.* o il plugin git/info)."
+    }
+  ]
+}

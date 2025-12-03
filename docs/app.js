@@ -1,9 +1,9 @@
 const courses = [
-  { id: "corso1", name: "Corso Spring base", level: "intermediate", json: "../json/corso1.json" },
-  { id: "actuator", name: "Actuator", level: "basic", json: "../json/actuator.json" },
-  { id: "ai", name: "Spring + AI", level: "intermediate", json: "../json/ai.json" },
-  { id: "rest", name: "REST", level: "basic", json: "../json/rest.json" },
-  { id: "springsecurity", name: "Spring Security", level: "intermediate", json: "../json/springsecurity.json" },
+  { id: "corso1", name: "Corso Spring base", level: "intermediate", json: "./json/corso1.json" },
+  { id: "actuator", name: "Actuator", level: "basic", json: "./json/actuator.json" },
+  { id: "ai", name: "Spring + AI", level: "intermediate", json: "./json/ai.json" },
+  { id: "rest", name: "REST", level: "basic", json: "./json/rest.json" },
+  { id: "springsecurity", name: "Spring Security", level: "intermediate", json: "./json/springsecurity.json" },
 ];
 
 const state = {

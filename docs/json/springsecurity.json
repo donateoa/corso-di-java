@@ -1,0 +1,151 @@
+{
+  "test": "springsecurity",
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "In Spring Boot 3, qual è il modo raccomandato per configurare HTTP security?",
+      "options": [
+        "Estendere WebSecurityConfigurerAdapter",
+        "Esporre un bean SecurityFilterChain con la lambda DSL",
+        "Registrare manualmente i filtri nel web.xml",
+        "Configurare solo application.properties"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "WebSecurityConfigurerAdapter è deprecato e rimosso; si definisce un bean SecurityFilterChain con la DSL basata su lambda, dichiarando autorizzazioni, csrf, session management e filter order nel codice."
+    },
+    {
+      "id": "Q2",
+      "text": "Per una REST API con JWT stateless, quale policy di session management è corretta?",
+      "options": [
+        "ALWAYS",
+        "IF_REQUIRED",
+        "STATELESS",
+        "NEVER obbligatorio"
+      ],
+      "correct": [
+        "C"
+      ],
+      "answer": "STATELESS evita la creazione/uso di HttpSession e si affida al token (es. JWT) per l’autenticazione a ogni richiesta. ALWAYS/IF_REQUIRED creano sessioni, mentre NEVER non è pensato per uso con filtri di sicurezza moderni."
+    },
+    {
+      "id": "Q3",
+      "text": "Quali affermazioni su CSRF in Spring Security 6 sono corrette? (risposta multipla)",
+      "options": [
+        "Per API stateless con bearer token è comune disabilitare CSRF",
+        "Con form login va lasciato attivo e si usa il token _csrf nel form",
+        "CSRF è disattivato di default nelle app web",
+        "Si può cambiare CsrfTokenRepository per memorizzare il token in cookie/header"
+      ],
+      "correct": [
+        "A",
+        "B",
+        "D"
+      ],
+      "answer": "CSRF è abilitato di default nelle app web; per API stateless con token portato dal client si può disabilitare. Con form login bisogna includere _csrf nel form. È possibile personalizzare il repository (es. CookieCsrfTokenRepository) per gestire token via cookie/header."
+    },
+    {
+      "id": "Q4",
+      "text": "Come si abilita la sicurezza a livello di metodo (es. @PreAuthorize) in Boot 3?",
+      "options": [
+        "@EnableGlobalMethodSecurity(prePostEnabled = true)",
+        "@EnableMethodSecurity",
+        "@EnableSecuredEndpoints",
+        "@MethodSecurity"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "In Spring Security 6/Boot 3 si usa @EnableMethodSecurity; @EnableGlobalMethodSecurity è obsoleta. L’annotazione abilita @PreAuthorize, @PostAuthorize, @Secured e @RolesAllowed se configurate."
+    },
+    {
+      "id": "Q5",
+      "text": "Quali passi sono corretti per validare un JWT custom in una REST API? (risposta multipla)",
+      "options": [
+        "Aggiungere un OncePerRequestFilter prima di UsernamePasswordAuthenticationFilter",
+        "Verificare firma e scadenza del token",
+        "Creare un Authentication e metterlo nel SecurityContext se valido",
+        "Forzare la creazione di HttpSession per salvare l’Authentication"
+      ],
+      "correct": [
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": "Un filtro custom prima di UsernamePasswordAuthenticationFilter legge il token, ne verifica firma/exp e, se valido, costruisce un Authentication nel SecurityContext. Non serve forzare HttpSession in un sistema stateless."
+    },
+    {
+      "id": "Q6",
+      "text": "Per indurire gli endpoint admin, quali misure sono opportune?",
+      "options": [
+        "Limitare l’accesso a ruoli dedicati e privilegio minimo",
+        "Forzare MFA e IP allowlist per gli account amministrativi",
+        "Proteggere gli endpoint sensibili con rate limit e logging/audit",
+        "Tutte le precedenti"
+      ],
+      "correct": [
+        "D"
+      ],
+      "answer": "A, B e C sono tutte best practice: ruoli minimali, MFA e controlli di rete per gli admin, rate limiting e audit sugli endpoint sensibili. Sommate riducono il rischio di compromissione."
+    },
+    {
+      "id": "Q7",
+      "text": "Qual è la differenza tra authorities e roles in Spring Security?",
+      "options": [
+        "Nessuna, sono sinonimi",
+        "I ruoli sono authorities con prefisso ROLE_, usati da hasRole/hasAnyRole",
+        "Le authorities funzionano solo con LDAP",
+        "I ruoli funzionano solo con OAuth2"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "Un ruolo è un’autorità con prefisso ROLE_ (es. ROLE_ADMIN). I metodi hasRole/hasAnyRole aggiungono automaticamente il prefisso, mentre hasAuthority verifica il valore esatto. Le authorities non sono legate a un meccanismo d’identità specifico."
+    },
+    {
+      "id": "Q8",
+      "text": "Configurando un Resource Server JWT in Spring Boot, quali elementi sono necessari? (risposta multipla)",
+      "options": [
+        "Abilitare oauth2ResourceServer().jwt() nella SecurityFilterChain",
+        "Fornire un jwk-set-uri o una chiave pubblica per la verifica",
+        "Aggiungere la dipendenza spring-boot-starter-oauth2-resource-server",
+        "Definire manualmente un AuthenticationManager custom in ogni controller"
+      ],
+      "correct": [
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": "Serve lo starter resource server, la config oauth2ResourceServer().jwt() e un modo per verificare la firma (JWK set URI o chiave pubblica). Non è necessario creare un AuthenticationManager per controller: la filter chain gestisce l’autenticazione."
+    },
+    {
+      "id": "Q9",
+      "text": "Quale approccio è corretto per abilitare CORS in modo sicuro su una REST API?",
+      "options": [
+        "Abilitare tutte le origini con \\\\* e tutti i metodi senza limitazioni",
+        "Definire un CorsConfiguration con origini/metodi/headers ammessi e maxAge, registrato in SecurityFilterChain",
+        "Gestirlo con System.out.println",
+        "Impostare solo un header Access-Control-Allow-Origin nel controller"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "Un CorsConfiguration esplicito (origini, metodi, header ammessi, credenziali, maxAge) registrato via CorsConfigurationSource e applicato in SecurityFilterChain limita la superficie di attacco. Wildcard indiscriminate o log non configurano CORS in modo sicuro."
+    },
+    {
+      "id": "Q10",
+      "text": "Perché usare PasswordEncoder delegating (es. PasswordEncoderFactories.createDelegatingPasswordEncoder())?",
+      "options": [
+        "Per salvare password in chiaro",
+        "Per gestire più algoritmi e migrare gli hash nel tempo",
+        "Per eliminare la necessità di salt",
+        "Perché è obbligatorio con JDBC"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "Il delegating PasswordEncoder permette di usare un identificatore nell’hash ({bcrypt}, {argon2}, ecc.) così puoi supportare e migrare algoritmi senza rompere utenti esistenti. Non salva in chiaro, non elimina il salt (che è incluso in algoritmi come bcrypt) e non è legato a JDBC."
+    }
+  ]
+}

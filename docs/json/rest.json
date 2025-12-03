@@ -1,0 +1,148 @@
+{
+  "test": "rest",
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "Quale metodo HTTP è idempotente secondo lo standard REST?",
+      "options": [
+        "POST",
+        "PUT",
+        "PATCH",
+        "CONNECT"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "PUT è definito idempotente: più chiamate con lo stesso body producono lo stesso stato della risorsa. POST e PATCH in genere non lo sono, CONNECT non è usato per aggiornare risorse REST."
+    },
+    {
+      "id": "Q2",
+      "text": "Qual è l’uso corretto di un codice 201 Created?",
+      "options": [
+        "Quando crei una risorsa con POST e fornisci Location dell’URI creato",
+        "Quando aggiorni parzialmente una risorsa",
+        "Quando la richiesta è malformata",
+        "Quando il client non è autenticato"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "201 Created si usa per creazione riuscita via POST; va incluso l’header Location con l’URI della nuova risorsa. 400 indica errore di input, 401 è per autenticazione mancante, gli update parziali usano 200/204."
+    },
+    {
+      "id": "Q3",
+      "text": "Quale annotazione usi per definire un controller REST in Spring Boot?",
+      "options": [
+        "@Controller",
+        "@RestController",
+        "@WebService",
+        "@RestService"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "@RestController combina @Controller e @ResponseBody, restituendo il body direttamente in JSON/XML. @Controller da solo richiede @ResponseBody sui metodi; le altre annotazioni non sono per REST controller Spring."
+    },
+    {
+      "id": "Q4",
+      "text": "Per aggiornare parzialmente una risorsa, quale combinazione è più appropriata?",
+      "options": [
+        "PATCH con payload JSON e validazione",
+        "POST senza body",
+        "GET con query param action=update",
+        "DELETE seguito da PUT"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "PATCH è pensato per modifiche parziali; in Spring si gestisce con @PatchMapping, validazione e controlli di concorrenza. POST senza body o GET non sono semantici, cancellare e ricreare è inefficiente e rischioso."
+    },
+    {
+      "id": "Q5",
+      "text": "Quali sono buone pratiche per versionare una API REST? (risposta multipla)",
+      "options": [
+        "Inserire la versione nel path es. /v1/risorse",
+        "Usare header personalizzati es. Accept: application/vnd.acme.v1+json",
+        "Cambiare la porta per ogni versione",
+        "Documentare e mantenere più versioni per un periodo di transizione"
+      ],
+      "correct": [
+        "A",
+        "B",
+        "D"
+      ],
+      "answer": "Versionare nel path o via media type sono approcci comuni; mantenere più versioni documentate facilita la migrazione. Cambiare porta non è pratico e non scala."
+    },
+    {
+      "id": "Q6",
+      "text": "Quale risposta HTTP è adeguata per una DELETE riuscita senza body?",
+      "options": [
+        "200 OK con body vuoto",
+        "204 No Content",
+        "202 Accepted obbligatorio",
+        "301 Moved Permanently"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "204 No Content segnala che l’operazione è andata a buon fine e non c’è payload. 200 è accettabile ma 204 è preferito; 202 indica elaborazione asincrona; 301 è per redirect e non pertinente."
+    },
+    {
+      "id": "Q7",
+      "text": "Quale intestazione HTTP usi per gestire la concorrenza ottimistica?",
+      "options": [
+        "If-Match con ETag",
+        "User-Agent",
+        "Referer",
+        "Retry-After"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "If-Match con l’ETag del client permette di accettare l’update solo se la versione coincide, prevenendo overwrite concorrenti. Le altre intestazioni non gestiscono concorrenza."
+    },
+    {
+      "id": "Q8",
+      "text": "Quali status code sono corretti per indicare che una risorsa richiesta non esiste? (risposta multipla)",
+      "options": [
+        "404 Not Found",
+        "410 Gone",
+        "204 No Content",
+        "500 Internal Server Error"
+      ],
+      "correct": [
+        "A",
+        "B"
+      ],
+      "answer": "404 segnala risorsa non trovata, 410 che è stata rimossa in modo definitivo e noto. 204 indica successo senza contenuto, 500 è per errori server."
+    },
+    {
+      "id": "Q9",
+      "text": "Qual è il modo più pulito per esporre DTO diversi da entity JPA in un controller?",
+      "options": [
+        "Restituire direttamente le entity",
+        "Usare mapper (es. MapStruct) o assembler per convertire entity in DTO",
+        "Usare System.out.println nel controller",
+        "Serializzare manualmente con concatenazioni di stringhe"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "Separare DTO da entity evita esporre dettagli di persistenza; un mapper/assembler converte tra livelli mantenendo controllo su campi e validazione. Stampare su console o concatenare stringhe non è manutenibile; esporre entity può generare coupling e problemi di sicurezza."
+    },
+    {
+      "id": "Q10",
+      "text": "Quale delle seguenti è corretta riguardo alla paginazione in REST?",
+      "options": [
+        "Esporre parametri page e size, restituendo metadata (totale, pagina corrente) nel body o header",
+        "Usare una singola pagina con tutti i dati",
+        "Forzare sempre page=0 e size fisso",
+        "Evitarla se i dati sono molti"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Paginare con parametri page/size e includere metadati consente al client di navigare dataset grandi senza caricare tutto. Una singola pagina non scala; fissare page/size rigidamente limita il client; evitare la paginazione con molti dati è impraticabile e causa problemi di performance."
+    }
+  ]
+}
