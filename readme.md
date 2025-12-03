@@ -42,7 +42,7 @@ Puoi indicare più risposte corrette con `correct:A,C`. Separa i blocchi con una
 
 ## Catalogo corsi disponibili
 
-- 📚 Corso Spring base (corso1) — 80 domande — livello: intermediate
-- ⚙️ Actuator — 10 domande — livello: basic
-- 🤖 Spring + AI — 10 domande — livello: intermediate
-- 🌐 REST — 10 domande — livello: basic
+- 📚 Corso Spring base (corso1) — 80 domande — livello: intermediate — esegui: `java SpringMockExam corso1`
+- ⚙️ Actuator — 10 domande — livello: basic — esegui: `java SpringMockExam actuator`
+- 🤖 Spring + AI — 10 domande — livello: intermediate — esegui: `java SpringMockExam ai`
+- 🌐 REST — 10 domande — livello: basic — esegui: `java SpringMockExam rest`
