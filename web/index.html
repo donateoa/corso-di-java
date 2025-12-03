@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spring Mock Exam - Web</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --accent: #22c55e;
+      --accent-2: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --border: #1f2937;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(56,189,248,0.08), transparent 35%),
+                  radial-gradient(circle at 80% 0%, rgba(34,197,94,0.10), transparent 25%),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px;
+    }
+    h1, h2, h3 { margin: 0 0 12px; }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 20px 70px rgba(0,0,0,0.35);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .course {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      background: linear-gradient(145deg, #111827, #0b1224);
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56,189,248,0.12);
+      border: 1px solid rgba(56,189,248,0.4);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 13px;
+    }
+    button {
+      background: linear-gradient(135deg, var(--accent), #16a34a);
+      color: #0b1224;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
+    }
+    button:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(34,197,94,0.35); }
+    button:active { transform: translateY(0); }
+    .muted { color: var(--muted); font-size: 14px; }
+    .quiz-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .options { list-style: none; padding: 0; margin: 16px 0; }
+    .options li {
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      background: #0e1525;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .badge {
+      background: rgba(34,197,94,0.14);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 12px;
+      border: 1px solid rgba(34,197,94,0.4);
+    }
+    .feedback {
+      border-radius: 10px;
+      padding: 12px;
+      margin-top: 10px;
+    }
+    .feedback.ok { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.4); }
+    .feedback.ko { background: rgba(248,113,113,0.15); border: 1px solid rgba(248,113,113,0.4); }
+    .actions { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+    .timer { font-weight: 600; color: var(--accent-2); }
+    @media (max-width: 600px) {
+      body { padding: 16px; }
+      .quiz-header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Spring Mock Exam — Web</h1>
+      <p class="muted">Quiz Spring Boot / Security / REST / Actuator / AI. Seleziona un corso e svolgi le domande direttamente nel browser.</p>
+      <section id="home">
+        <h2>Corsi disponibili</h2>
+        <div id="course-grid" class="grid"></div>
+      </section>
+
+      <section id="quiz" style="display:none; margin-top: 20px;">
+        <div class="quiz-header">
+          <div>
+            <div id="course-title" style="font-size: 20px; font-weight: 700;"></div>
+            <div id="progress" class="muted"></div>
+          </div>
+          <div class="pill">⏱ Tempo totale: <span id="timer" class="timer">00:00</span></div>
+        </div>
+
+        <div style="margin-top: 12px; border-top: 1px solid var(--border); padding-top: 12px;">
+          <div id="question-text" style="font-size: 18px; font-weight: 600;"></div>
+          <div id="question-meta" class="muted" style="margin-top: 6px;"></div>
+          <ul id="options" class="options"></ul>
+          <div class="actions">
+            <button id="submit-btn">Invia risposta</button>
+            <button id="next-btn" style="display:none; background: linear-gradient(135deg, var(--accent-2), #0ea5e9); color: #0b1224;">Prossima</button>
+            <button id="back-btn" style="background: #1f2937; color: var(--text); border: 1px solid var(--border);">Torna alla home</button>
+          </div>
+          <div id="feedback" class="feedback" style="display:none;"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script src="./app.js" defer></script>
+</body>
+</html>

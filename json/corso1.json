@@ -1,0 +1,1128 @@
+{
+  "test": "corso1",
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "Quale annotazione combina @Controller e @ResponseBody restituendo JSON/XML di default?",
+      "options": [
+        "@RestController",
+        "@Controller",
+        "@Component",
+        "@Service"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Combina @Controller e @ResponseBody così i metodi restituiscono direttamente il body (JSON/XML)."
+    },
+    {
+      "id": "Q2",
+      "text": "Quale endpoint Actuator è rischioso esporre pubblicamente senza autenticazione?",
+      "options": [
+        "/info",
+        "/health",
+        "/env",
+        "/beans"
+      ],
+      "correct": [
+        "C",
+        "D"
+      ],
+      "answer": "/env espone configurazioni sensibili; /beans rivela i bean e la struttura dell’app."
+    },
+    {
+      "id": "Q3",
+      "text": "Qual è la classe di default per JSON in Spring Boot?",
+      "options": [
+        "GsonParser",
+        "Jackson ObjectMapper",
+        "JsonReader",
+        "JsonMarshaller"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "Spring Boot configura di default Jackson e il suo ObjectMapper."
+    },
+    {
+      "id": "Q4",
+      "text": "Quali annotazioni possono contenere metodi @Bean? (risposta multipla)",
+      "options": [
+        "@Configuration",
+        "@Component",
+        "@RestController",
+        "@Service"
+      ],
+      "correct": [
+        "A",
+        "B"
+      ],
+      "answer": "@Configuration espone @Bean con proxy CGLIB; anche una classe @Component può dichiararli ma senza la semantica completa di @Configuration."
+    },
+    {
+      "id": "Q5",
+      "text": "Quale annotazione abilita la scansione dei componenti?",
+      "options": [
+        "@EnableScan",
+        "@ComponentScan",
+        "@ScanComponents",
+        "@SpringScan"
+      ],
+      "correct": [
+        "B"
+      ],
+      "answer": "@ComponentScan rileva classi annotate (@Component, @Service, ecc.) nei package indicati."
+    },
+    {
+      "id": "Q6",
+      "text": "Quali sono i due tipi principali di reactive publishers in Spring WebFlux?",
+      "options": [
+        "Mono e Flux",
+        "Observable e Flowable",
+        "Stream e CompletableFuture",
+        "Promise e Task"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Mono rappresenta 0..1 elemento, Flux 0..N; sono i tipi reattivi di Project Reactor."
+    },
+    {
+      "id": "Q7",
+      "text": "Quale bean viene creato in un Feign Client personalizzato?",
+      "options": [
+        "FeignDecoder",
+        "FeignClient",
+        "RestClient",
+        "WebClient"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Un decoder personalizzato (FeignDecoder) consente di gestire come decodificare le risposte."
+    },
+    {
+      "id": "Q8",
+      "text": "Cosa indica @Bean?",
+      "options": [
+        "Definisce un bean gestito dal container",
+        "Registra un controller",
+        "Definisce un repository",
+        "Crea un thread"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Dichiara un oggetto che Spring deve istanziare e gestire nel suo contesto."
+    },
+    {
+      "id": "Q9",
+      "text": "Quale annotazione viene usata per gestire transazioni in Spring?",
+      "options": [
+        "@Transactional",
+        "@Transactions",
+        "@EnableTx",
+        "@EnableDatabase"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@Transactional avvolge il metodo in una transazione con il TransactionManager configurato."
+    },
+    {
+      "id": "Q10",
+      "text": "In Spring Boot 3.x è obbligatorio l’uso dei package Jakarta?",
+      "options": [
+        "Sì",
+        "No",
+        "Solo per WebFlux",
+        "Solo nei test"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Con Spring 6/Boot 3 i pacchetti javax.* sono migrati a jakarta.*, quindi è obbligatorio il namespace Jakarta."
+    },
+    {
+      "id": "Q11",
+      "text": "Quale livello di logging registra solo errori?",
+      "options": [
+        "ERROR",
+        "WARN",
+        "INFO",
+        "DEBUG"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "ERROR mostra solo gli errori; i livelli superiori (WARN, INFO, DEBUG) includono più eventi."
+    },
+    {
+      "id": "Q12",
+      "text": "Cosa fa @Autowired?",
+      "options": [
+        "Effettua dependency injection automatica",
+        "Registra un bean",
+        "Crea un proxy",
+        "Crea un nuovo contesto Spring"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Rileva il bean compatibile e lo inietta automaticamente nel punto dichiarato."
+    },
+    {
+      "id": "Q13",
+      "text": "Quale è un vantaggio dell’uso di constructor injection?",
+      "options": [
+        "Immutabilità e testabilità",
+        "Richiede XML",
+        "È più lento",
+        "Evita il ciclo di vita del bean"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Il costruttore rende obbligatorie le dipendenze e facilita test e immutabilità."
+    },
+    {
+      "id": "Q14",
+      "text": "Quale oggetto permette di accedere agli argomenti del metodo in AOP?",
+      "options": [
+        "JoinPoint",
+        "Interceptor",
+        "Advice",
+        "TargetPoint"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "JoinPoint/ProceedingJoinPoint espone metodo target e argomenti."
+    },
+    {
+      "id": "Q15",
+      "text": "Quale comando avvia un'applicazione Spring Boot?",
+      "options": [
+        "mvn spring-boot:run",
+        "mvn run",
+        "mvn start",
+        "mvn exec"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Il goal spring-boot:run del plugin avvia direttamente l’app."
+    },
+    {
+      "id": "Q16",
+      "text": "Quale annotazione abilita i Feign Client?",
+      "options": [
+        "@EnableFeignClients",
+        "@EnableFeign",
+        "@EnableClients",
+        "@FeignEnable"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@EnableFeignClients attiva la scansione delle interfacce @FeignClient."
+    },
+    {
+      "id": "Q17",
+      "text": "Qual è il server web embedded di default in Spring Boot?",
+      "options": [
+        "Tomcat",
+        "Jetty",
+        "Netty",
+        "Grizzly"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Lo starter web include Tomcat embedded come default."
+    },
+    {
+      "id": "Q18",
+      "text": "Quale dipendenza abilita Actuator?",
+      "options": [
+        "spring-boot-starter-actuator",
+        "spring-boot-starter-monitor",
+        "spring-boot-starter-admin",
+        "spring-boot-starter-health"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Lo starter actuator espone endpoint di monitoraggio/metriche."
+    },
+    {
+      "id": "Q19",
+      "text": "Quale validazione si usa per indicare un campo obbligatorio?",
+      "options": [
+        "@NotNull",
+        "@Required",
+        "@Mandatory",
+        "@NonEmpty"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@NotNull richiede che il valore non sia null (per stringhe spesso si usa @NotBlank)."
+    },
+    {
+      "id": "Q20",
+      "text": "Quale annotazione espone un endpoint REST?",
+      "options": [
+        "@GetMapping",
+        "@RestMapping",
+        "@MappingGet",
+        "@Request"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@GetMapping mappa una richiesta HTTP GET su un metodo."
+    },
+    {
+      "id": "Q21",
+      "text": "Quale annotazione abilita la configurazione asincrona?",
+      "options": [
+        "@EnableAsync",
+        "@AsyncEnabled",
+        "@AsyncConfig",
+        "@EnableThreading"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@EnableAsync attiva il supporto ai metodi @Async."
+    },
+    {
+      "id": "Q22",
+      "text": "Quale interfaccia viene implementata da un custom HealthIndicator?",
+      "options": [
+        "HealthIndicator",
+        "Indicator",
+        "StatusProvider",
+        "HealthProvider"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Implementando HealthIndicator fornisci lo stato di salute personalizzato."
+    },
+    {
+      "id": "Q23",
+      "text": "Cosa produce un bean singleton?",
+      "options": [
+        "Una sola istanza per contesto",
+        "Un nuovo bean a ogni richiesta",
+        "Un bean per thread",
+        "Un bean per sessione"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Singleton è lo scope predefinito: un’unica istanza nel contesto."
+    },
+    {
+      "id": "Q24",
+      "text": "Cosa fa @Primary?",
+      "options": [
+        "Indica quale bean usare in caso di conflitto",
+        "Rende immutabile il bean",
+        "Rende thread-safe il bean",
+        "Registra un bean come lazy"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@Primary marca il bean preferito quando esistono più candidati dello stesso tipo."
+    },
+    {
+      "id": "Q25",
+      "text": "Cosa fa @ConditionalOnMissingBean?",
+      "options": [
+        "Registra un bean solo se assente",
+        "Rimuove i bean duplicati",
+        "Override dei bean per default",
+        "Blocca l’avvio del contesto"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Crea il bean solo se non è già presente un bean compatibile nel contesto."
+    },
+    {
+      "id": "Q26",
+      "text": "Quali endpoint Actuator contengono informazioni sensibili?",
+      "options": [
+        "/env",
+        "/beans",
+        "/conditions",
+        "All"
+      ],
+      "correct": [
+        "A",
+        "B"
+      ],
+      "answer": "/env e /beans espongono configurazioni e struttura dell’app: da proteggere in produzione."
+    },
+    {
+      "id": "Q27",
+      "text": "Qual è la signature di un SecurityFilterChain?",
+      "options": [
+        "SecurityFilterChain filterChain(HttpSecurity http)",
+        "Security filterChain(HttpSecurity http)",
+        "HttpSecurity chain()",
+        "SecurityChain build()"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "In Spring Security 6 si definisce un bean SecurityFilterChain filterChain(HttpSecurity http)."
+    },
+    {
+      "id": "Q28",
+      "text": "Quale filtro è sempre il primo nella chain Spring Security?",
+      "options": [
+        "WebAsyncManagerIntegrationFilter",
+        "UsernamePasswordAuthenticationFilter",
+        "CsrfFilter",
+        "RequestCacheFilter"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "WebAsyncManagerIntegrationFilter è posizionato all’inizio della catena."
+    },
+    {
+      "id": "Q29",
+      "text": "Cosa fa WebFlux?",
+      "options": [
+        "Gestisce richieste in modo reattivo non bloccante",
+        "Gestisce thread blocking",
+        "È un wrapper di Servlet 5",
+        "Serve solo per websocket"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "WebFlux è il framework reattivo non-blocking basato su Reactor."
+    },
+    {
+      "id": "Q30",
+      "text": "Quale repository pattern usa Spring Data JPA?",
+      "options": [
+        "CrudRepository",
+        "MongoRepository",
+        "JdbcRepository",
+        "Neo4jRepository"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "CrudRepository è l’interfaccia base per le operazioni CRUD con JPA."
+    },
+    {
+      "id": "Q31",
+      "text": "Come si abilita caching?",
+      "options": [
+        "@EnableCaching",
+        "@CacheableEnable",
+        "@EnableCache",
+        "@CachingOn"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@EnableCaching attiva la gestione cache e le annotation @Cacheable/@CacheEvict."
+    },
+    {
+      "id": "Q32",
+      "text": "@Cacheable cosa fa?",
+      "options": [
+        "Memorizza il risultato di un metodo",
+        "Annulla la cache",
+        "Logga le chiamate",
+        "Abilita la sicurezza"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@Cacheable salva il risultato nel cache store configurato."
+    },
+    {
+      "id": "Q33",
+      "text": "Quale annotation invalida la cache?",
+      "options": [
+        "@CacheEvict",
+        "@CacheRemove",
+        "@CacheInvalidate",
+        "@CacheClear"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@CacheEvict rimuove le entry cache per le chiavi configurate."
+    },
+    {
+      "id": "Q34",
+      "text": "Quale annotation mappa un path su un controller?",
+      "options": [
+        "@RequestMapping",
+        "@RestMapping",
+        "@MapPath",
+        "@Route"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@RequestMapping definisce il mapping di percorso e metodo HTTP (o usa @GetMapping & co.)."
+    },
+    {
+      "id": "Q35",
+      "text": "Spring Boot Actuator espone lo stato dell'applicazione tramite:",
+      "options": [
+        "HealthEndpoint",
+        "StatusController",
+        "PingController",
+        "InfoFilter"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "HealthEndpoint fornisce lo stato aggregato e i componenti di health."
+    },
+    {
+      "id": "Q36",
+      "text": "Cosa indica un bean prototype?",
+      "options": [
+        "Una nuova istanza ogni volta",
+        "Una sola istanza",
+        "Una istanza per sessione",
+        "Una istanza per thread"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Scope prototype crea un nuovo bean ad ogni richiesta al container."
+    },
+    {
+      "id": "Q37",
+      "text": "Come si abilita JPA?",
+      "options": [
+        "@EnableJpaRepositories",
+        "@EnableJPA",
+        "@Jpa",
+        "@EnableHibernate"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@EnableJpaRepositories abilita la scansione dei repository JPA."
+    },
+    {
+      "id": "Q38",
+      "text": "Quale libreria usa Spring per JSON?",
+      "options": [
+        "Jackson",
+        "Gson",
+        "FastJson",
+        "JsonSmart"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Spring Boot configura Jackson come mapper JSON di default."
+    },
+    {
+      "id": "Q39",
+      "text": "Quali sono i due principi chiave di Spring?",
+      "options": [
+        "IoC e DI",
+        "REST e SOAP",
+        "Servlet e JSP",
+        "Threads e Locks"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Inversion of Control e Dependency Injection guidano il modello di programmazione Spring."
+    },
+    {
+      "id": "Q40",
+      "text": "Cosa è un ApplicationContext?",
+      "options": [
+        "Il container IoC di Spring",
+        "Un logger",
+        "Un thread pool",
+        "Un proxy"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "È il contenitore che gestisce bean, ciclo di vita e injection."
+    },
+    {
+      "id": "Q41",
+      "text": "Quale è un tipico errore se due bean hanno lo stesso nome?",
+      "options": [
+        "NoSuchBeanDefinitionException",
+        "DuplicateBeanException",
+        "BeanConflictException",
+        "IllegalStateException"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Una definizione unica sovrascritta può portare a NoSuchBeanDefinition o conflitti di bean naming."
+    },
+    {
+      "id": "Q42",
+      "text": "Quale annotation definisce un filtro globale di eccezioni?",
+      "options": [
+        "@ControllerAdvice",
+        "@RestException",
+        "@ExceptionManager",
+        "@AdviceHandler"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@ControllerAdvice applica aspetti globali (es. handling eccezioni) a tutti i controller."
+    },
+    {
+      "id": "Q43",
+      "text": "Cosa fa @ExceptionHandler?",
+      "options": [
+        "Gestisce un tipo di eccezione specifico",
+        "Registra un controller",
+        "Abilita logging",
+        "Crea un bean"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@ExceptionHandler mappa uno o più tipi di eccezione a un metodo di gestione."
+    },
+    {
+      "id": "Q44",
+      "text": "In un Feign Client, cosa fa fallbackFactory?",
+      "options": [
+        "Crea fallback dinamici",
+        "Gestisce i timeout",
+        "Gestisce le metriche",
+        "Abilita circuit breaking"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "fallbackFactory costruisce un’istanza di fallback usando l’eccezione come contesto."
+    },
+    {
+      "id": "Q45",
+      "text": "Cosa è uno scope request?",
+      "options": [
+        "Un bean creato per ogni richiesta HTTP",
+        "Un bean condiviso",
+        "Un bean per thread",
+        "Un bean singleton"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Nello scope request Spring crea un nuovo bean per ogni richiesta HTTP."
+    },
+    {
+      "id": "Q46",
+      "text": "Quale dependency abilita Web?",
+      "options": [
+        "spring-boot-starter-web",
+        "spring-boot-starter-reactive",
+        "spring-boot-starter-data",
+        "spring-boot-starter-db"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Lo starter web abilita MVC/Servlet con Tomcat, Jackson, validation, ecc."
+    },
+    {
+      "id": "Q47",
+      "text": "Quale protocollo usa WebFlux in modalità non servlet?",
+      "options": [
+        "Netty",
+        "Tomcat",
+        "Jetty",
+        "Grizzly"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "In modalità reattiva non servlet lo starter webflux usa Netty."
+    },
+    {
+      "id": "Q48",
+      "text": "Cosa abilita @EnableScheduling?",
+      "options": [
+        "Task schedulati",
+        "Cache",
+        "Logging",
+        "Profilazione"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@EnableScheduling attiva l’esecuzione di metodi annotati @Scheduled."
+    },
+    {
+      "id": "Q49",
+      "text": "Quale annotation definisce un job schedulato?",
+      "options": [
+        "@Scheduled",
+        "@Timing",
+        "@Job",
+        "@CronTask"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@Scheduled pianifica l’esecuzione del metodo (cron, fixedDelay, fixedRate)."
+    },
+    {
+      "id": "Q50",
+      "text": "Quale annotazione permette injection di valori da application.properties?",
+      "options": [
+        "@Value",
+        "@InjectValue",
+        "@Property",
+        "@ConfigProperty"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@Value legge una property e la inietta nel campo/metodo/costruttore."
+    },
+    {
+      "id": "Q51",
+      "text": "Quale formato di configurazione è supportato nativamente?",
+      "options": [
+        "properties e yaml",
+        "xml",
+        "ini",
+        "toml"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Spring Boot supporta application.properties e application.yml/yaml di default."
+    },
+    {
+      "id": "Q52",
+      "text": "Quale annotation abilita configurazione basata sui record?",
+      "options": [
+        "@ConfigurationProperties",
+        "@RecordConfig",
+        "@Props",
+        "@Settings"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@ConfigurationProperties mappa prefissi di configurazione su POJO o record."
+    },
+    {
+      "id": "Q53",
+      "text": "Cosa indica @EnableWebFlux?",
+      "options": [
+        "Abilita il runtime WebFlux",
+        "Abilita servlet",
+        "Abilita MVC",
+        "Abilita Actuator"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@EnableWebFlux attiva la configurazione reattiva basata su Netty/Servlet non blocking."
+    },
+    {
+      "id": "Q54",
+      "text": "Quale tipo di proxy usa default Spring AOP?",
+      "options": [
+        "JDK Proxy",
+        "Cglib",
+        "ByteBuddy",
+        "Javassist"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Per i bean con interfacce usa JDK dynamic proxies; per classi concrete ricorre a CGLIB."
+    },
+    {
+      "id": "Q55",
+      "text": "Cosa è un BeanFactory?",
+      "options": [
+        "Interfaccia base per la gestione dei bean",
+        "Un logger",
+        "Un thread pool",
+        "Un filtro"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "BeanFactory è l’interfaccia core per recuperare e gestire bean nel container."
+    },
+    {
+      "id": "Q56",
+      "text": "Quale annotation abilita il profilo attivo?",
+      "options": [
+        "@Profile",
+        "@Env",
+        "@Environment",
+        "@Active"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@Profile attiva bean solo per i profili indicati."
+    },
+    {
+      "id": "Q57",
+      "text": "Cosa fa @Lazy?",
+      "options": [
+        "Ritarda la creazione del bean",
+        "Rende più veloce Avvio",
+        "Rende immutabile il bean",
+        "Crea più istanze"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@Lazy rimanda l’istanziazione del bean finché non è richiesto."
+    },
+    {
+      "id": "Q58",
+      "text": "Quale annotation consente di definire un metodo iniziale?",
+      "options": [
+        "@PostConstruct",
+        "@Init",
+        "@Start",
+        "@Initialize"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@PostConstruct viene eseguito dopo l’inizializzazione del bean e l’iniezione delle dipendenze."
+    },
+    {
+      "id": "Q59",
+      "text": "Cosa fa @DeleteMapping?",
+      "options": [
+        "Gestisce DELETE",
+        "Gestisce PUT",
+        "Gestisce PATCH",
+        "Gestisce POST"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@DeleteMapping mappa le richieste HTTP DELETE a un metodo controller."
+    },
+    {
+      "id": "Q60",
+      "text": "Cosa significa CSRF?",
+      "options": [
+        "Cross-Site Request Forgery",
+        "Cross Script Request Filter",
+        "Cross System Recovery Function",
+        "Central Security Routing Function"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "CSRF è un attacco che forza un utente autenticato a inviare richieste malevole."
+    },
+    {
+      "id": "Q61",
+      "text": "Cosa fa un PasswordEncoder?",
+      "options": [
+        "Hashing della password",
+        "Memorizzazione",
+        "Log",
+        "Trim della password"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "PasswordEncoder esegue hashing/encoding per non memorizzare password in chiaro."
+    },
+    {
+      "id": "Q62",
+      "text": "Cosa fa BCrypt?",
+      "options": [
+        "Hash sicuro per password",
+        "Cripta file",
+        "Compress file",
+        "Genera token JWT"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "BCryptPasswordEncoder usa BCrypt per derivare hash robusti e lenti da password."
+    },
+    {
+      "id": "Q63",
+      "text": "Quale endpoint Actuator mostra le autoconfigurazioni attive?",
+      "options": [
+        "/actuator/conditions",
+        "/actuator/env",
+        "/actuator/health",
+        "/actuator/info"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "/actuator/conditions (ex /autoconfig) mostra condizioni soddisfatte e auto-config attive."
+    },
+    {
+      "id": "Q64",
+      "text": "Cosa fa @RefreshScope?",
+      "options": [
+        "Ricarica i bean su refresh config",
+        "Ricarica logging",
+        "Ricarica database",
+        "Ricarica metrics"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Con Spring Cloud, @RefreshScope ricrea i bean segnati quando arriva un refresh di configurazione."
+    },
+    {
+      "id": "Q65",
+      "text": "Quale annotation abilita Spring Cloud Config client?",
+      "options": [
+        "@EnableConfigServer",
+        "@EnableConfigClient",
+        "@EnableConfiguration",
+        "@ClientConfig"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@EnableConfigClient abilita il client Config per scaricare proprietà da Config Server."
+    },
+    {
+      "id": "Q66",
+      "text": "Quale dependency abilita WebFlux?",
+      "options": [
+        "spring-boot-starter-webflux",
+        "spring-boot-starter-reactive",
+        "spring-boot-starter-web",
+        "spring-boot-starter-netty"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Lo starter webflux abilita il runtime reattivo e include Netty e WebClient."
+    },
+    {
+      "id": "Q67",
+      "text": "Quale classe gestisce le richieste non bloccanti?",
+      "options": [
+        "WebClient",
+        "RestTemplate",
+        "HttpClient",
+        "AsyncRest"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "WebClient è il client reattivo non blocking che sostituisce RestTemplate."
+    },
+    {
+      "id": "Q68",
+      "text": "Cosa indica retryable?",
+      "options": [
+        "Ritenta una chiamata fallita",
+        "Fa caching",
+        "Logga errori",
+        "Previene chiamate parallele"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@Retryable permette di ritentare automaticamente un metodo in caso di eccezione."
+    },
+    {
+      "id": "Q69",
+      "text": "Quale annotazione abilita retry?",
+      "options": [
+        "@EnableRetry",
+        "@Retry",
+        "@Retryable",
+        "@RetryBean"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@EnableRetry attiva l’elaborazione di @Retryable/@Recover."
+    },
+    {
+      "id": "Q70",
+      "text": "Cosa fa @ControllerAdvice?",
+      "options": [
+        "Gestisce eccezioni globali",
+        "Abilita CORS",
+        "Abilita async",
+        "Abilita MVC"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@ControllerAdvice applica logica trasversale (es. exception handling) a tutti i controller."
+    },
+    {
+      "id": "Q71",
+      "text": "Quale è il default port di Tomcat?",
+      "options": [
+        "8080",
+        "80",
+        "8888",
+        "9090"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Tomcat embedded usa 8080 di default in Spring Boot."
+    },
+    {
+      "id": "Q72",
+      "text": "Quale file definisce le proprietà Spring?",
+      "options": [
+        "application.properties",
+        "spring.properties",
+        "config.yaml",
+        "settings.ini"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Spring Boot legge application.properties o application.yml nella cartella resources."
+    },
+    {
+      "id": "Q73",
+      "text": "Quale annotazione abilita validation?",
+      "options": [
+        "@Validated",
+        "@Validable",
+        "@EnableValidation",
+        "@EnableRules"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@Validated abilita la validazione a livello di classe/metodo, integrando Bean Validation."
+    },
+    {
+      "id": "Q74",
+      "text": "Cosa fa @Valid?",
+      "options": [
+        "Applica validazione al DTO",
+        "Logga DTO",
+        "Codifica DTO",
+        "Serializza DTO"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@Valid attiva la validazione Bean Validation su parametri/metodi/bean annidati."
+    },
+    {
+      "id": "Q75",
+      "text": "Cosa fa @Repository?",
+      "options": [
+        "Gestisce eccezioni di persistenza",
+        "Crea controller",
+        "Crea servizio",
+        "Crea bean singleton"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@Repository traduce eccezioni di persistenza in DataAccessException e marca il bean come DAO."
+    },
+    {
+      "id": "Q76",
+      "text": "Quale eccezione indica un problema di bean assente?",
+      "options": [
+        "NoSuchBeanDefinitionException",
+        "NoSuchControllerException",
+        "MissingFactoryException",
+        "EmptyContextException"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Lanciata quando non esiste un bean nel contesto con il tipo/nome richiesto."
+    },
+    {
+      "id": "Q77",
+      "text": "Quale annotation abilita Spring Boot Admin Client?",
+      "options": [
+        "@EnableAdminClient",
+        "@EnableSpringAdmin",
+        "@SpringBootAdmin",
+        "@AdminClient"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@EnableAdminClient registra il client verso Spring Boot Admin Server."
+    },
+    {
+      "id": "Q78",
+      "text": "Quale tipo di proxy è richiesto per advice sulle classi concrete?",
+      "options": [
+        "CGLIB",
+        "JDK",
+        "Bytecode",
+        "Static"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Se non c’è interfaccia, Spring usa proxy CGLIB per le classi concrete."
+    },
+    {
+      "id": "Q79",
+      "text": "Quale annotation abilita OpenAPI?",
+      "options": [
+        "@OpenAPIDefinition",
+        "@SwaggerConfig",
+        "@Api",
+        "@Doc"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "@OpenAPIDefinition (es. da springdoc-openapi) abilita la descrizione OpenAPI."
+    },
+    {
+      "id": "Q80",
+      "text": "Quale è la porta predefinita per Actuator?",
+      "options": [
+        "8080 (con prefisso /actuator)",
+        "9090",
+        "80",
+        "None"
+      ],
+      "correct": [
+        "A"
+      ],
+      "answer": "Actuator condivide la stessa porta dell’app (8080 di default) con prefisso /actuator."
+    }
+  ]
+}
