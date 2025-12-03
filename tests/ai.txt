@@ -1,0 +1,100 @@
+# Test "ai" - 10 domande su Spring Boot + AI
+
+id:Q1
+text:Qual è il modo più comune per integrare un modello LLM hosted (es. OpenAI) in una app Spring Boot?
+option:Chiamare l’API REST del provider tramite WebClient o RestTemplate
+option:Importare il modello come libreria JAR
+option:Eseguire il modello via JDBC
+option:Usare @LLMClient su un’interfaccia
+correct:A
+answer:Usare l’API HTTP del provider con un client reattivo o sincrono consente di gestire token, timeouts, retry e logging. Non esistono JAR ufficiali dei modelli, e JDBC non c’entra. Annota l’endpoint e aggiungi autenticazione per l’header. Puoi astrarre con un service che converte il prompt in una request strutturata e valida le risposte, includendo circuit breaker e metriche.
+
+
+id:Q2
+text:Perché è importante la gestione dei token di input/output quando usi LLM da Spring Boot?
+option:Per evitare errori di compilazione
+option:Per stimare costi e prevenire rate limit/timeout
+option:Per ridurre il tempo di build
+option:Per abilitare il caching di Hibernate
+correct:B
+answer:I provider tariffano e limitano le richieste in base ai token; se eccedi puoi incorrere in costi elevati o 429/timeout. Misurare i token permette di troncare input, spezzare prompt, usare modelli più piccoli o applicare backoff. Loggare token per richiesta aiuta l’osservabilità e l’alerting. Non incide su build o Hibernate.
+
+
+id:Q3
+text:Quali pattern sono utili per garantire resilienza nelle chiamate a servizi AI esterni? (risposta multipla)
+option:Circuit breaker
+option:Retry con backoff esponenziale e jitter
+option:Timeout e fallback
+option:Deserializzazione binaria dei model weights
+correct:A,B,C
+answer:Un circuito aperto protegge dai fallimenti ripetuti; i retry con backoff e jitter evitano thundering herd e gestiscono errori temporanei; i timeout e un fallback (es. risposta sintetica o degradazione di funzionalità) mantengono l’esperienza utente. Caricare pesi binari non è un pattern di resilienza per un client LLM hosted. Integrare questi pattern con actuator health e metriche offre visibilità end-to-end.
+
+
+id:Q4
+text:Come proteggi prompt e risposte LLM che contengono dati sensibili?
+option:Salvandoli sempre in chiaro nei log
+option:Anonimizzando/mascherando i dati e applicando controllo accessi
+option:Usando solo System.out.println
+option:Inviandoli via email agli sviluppatori
+correct:B
+answer:I prompt possono includere PII o segreti: prima di loggare o persistere è necessario mascherare, anonimizzare o tokenizzare i dati. Implementa controlli di accesso e retention minima. In produzione i log devono essere scrubbati e limitati. Configura anche TLS e non condividere le chiavi API. Le altre opzioni violano sicurezza e compliance. Un data catalog e policy DLP aiutano a evitare leakage di informazioni sensibili.
+
+
+id:Q5
+text:Per orchestrare un flusso AI, conviene combinare più LLM e tool tradizionali. Quale affermazione è corretta?
+option:Usi solo un LLM perché gli altri peggiorano la qualità
+option:Il modello decide sempre il routing senza regole
+option:Non servono validazioni perché i modelli sono affidabili
+option:Nessuna delle precedenti
+correct:D
+answer:La risposta corretta è D in realtà A, B e C sono cattive pratiche: spesso si usano modelli diversi per compiti specifici (es. generazione vs classificazione), il routing deve combinare regole e scoring, e la validazione è fondamentale (es. schema validation, controlli di safety, filtri contenuti). L’enfasi è sul fatto che affidarsi ciecamente a un singolo modello senza governance porta a risultati scadenti e rischiosi.
+
+
+id:Q6
+text:Quale opzione descrive meglio il Retrieval-Augmented Generation (RAG)?
+option:Recuperare documenti dal database e passarli al modello come contesto
+option:Usare sempre il modello più grande disponibile
+option:Allenare un LLM interno con tutto il codice sorgente
+option:Serializzare il modello in JSON
+correct:A
+answer:RAG prevede di recuperare documenti rilevanti (spesso da un vettorial store) e inserirli come contesto nella richiesta al modello, evitando di riaddestrarlo e riducendo allucinazioni. Non implica scegliere modelli enormi o fare full fine-tuning su tutto il codice. Serializzare un modello non è parte del pattern. Buone pratiche includono chunking, scoring, filtri di sicurezza e validazione dell’output.
+
+
+id:Q7
+text:Quali elementi sono fondamentali per valutare la qualità delle risposte AI in un’app Spring? (risposta multipla)
+option:Metriche automatiche (es. accuracy, BLEU/ROUGE dove applicabili)
+option:Valutazioni umane (red teaming, annotazioni)
+option:Test di regressione su dataset di prompt/risposte
+option:Minimizzare il numero di profili Spring
+correct:A,B,C
+answer:Per garantire qualità servono sia metriche automatiche dove possibile, sia giudizi umani su sicurezza, coerenza e utilità, oltre a regression test per evitare regressioni dopo cambi di prompt o modello. Questi flussi si integrano in CI/CD e usano dataset rappresentativi. Ridurre i profili Spring non influisce sulla valutazione. Un mix di automation e human-in-the-loop migliora l’affidabilità del sistema AI.
+
+
+id:Q8
+text:In un servizio che fa inference, quali metriche actuator esporresti? (risposta multipla)
+option:Tempo di risposta delle chiamate al modello
+option:Tassi di errore (HTTP 4xx/5xx, timeout)
+option:Token consumati per richiesta
+option:Numero di commit Git per release
+correct:A,B,C
+answer:Tempo di risposta e tassi di errore sono essenziali per osservabilità e SLO; i token consumati aiutano a monitorare costi e ad attivare rate limit o degradazione. Numero di commit Git non rileva per l’inference runtime. Integrare queste metriche con alerting e dashboard permette di reagire a degradi del provider o a cambi di utilizzo, mantenendo trasparenza operativa.
+
+
+id:Q9
+text:Qual è un approccio sicuro per gestire le chiavi API dei provider AI in Spring Boot?
+option:Inserirle hard-coded nel codice
+option:Metterle in application.yml senza alcuna protezione
+option:Leggerle da variabili d’ambiente o secret manager e non loggarle
+option:Inviarle al frontend per comodità
+correct:C
+answer:Le chiavi vanno gestite come segreti: caricate da variabili d’ambiente o secret manager (es. Vault, AWS Secrets Manager), con accesso limitato per ruolo. Non vanno hardcodate né loggate; evitare di inviarle al client. Assicurati di ruotarle periodicamente, usare scope minimi, e applicare controlli di audit. Anche il repository deve escludere file che contengono segreti accidentali.
+
+
+id:Q10
+text:Perché conviene validare l’output LLM contro uno schema (es. JSON Schema) quando lo usi come API interna?
+option:Per poter fallire velocemente se il modello produce output fuori specifica
+option:Per eliminare la necessità di test automatici
+option:Per ridurre il numero di controller Spring
+option:Per evitare l’uso di DTO
+correct:A
+answer:Validare l’output rispetto a uno schema permette di respingere risposte malformate prima che propaghino errori a valle, migliorando affidabilità. Non sostituisce i test ma li rafforza. Non riduce controller o DTO: semmai si deserializza in DTO tipizzati dopo la validazione. Il fail-fast consente di registrare errori e attivare fallback, proteggendo pipeline e utenti finali.
