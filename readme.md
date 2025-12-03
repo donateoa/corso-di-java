@@ -58,3 +58,7 @@ Puoi indicare più risposte corrette con `correct:A,C`. Separa i blocchi con una
   - Domande: 10
   - Livello: basic
   - Esegui: `java SpringMockExam rest`
+- 🔒 Spring Security
+  - Domande: 10
+  - Livello: intermediate
+  - Esegui: `java SpringMockExam springsecurity`
