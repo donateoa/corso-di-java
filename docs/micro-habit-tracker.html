@@ -330,7 +330,6 @@
         .grid-header {
             margin-bottom: 10px;
             padding: 4px 2px 6px;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.35);
             width: 100%;
         }
 
@@ -432,6 +431,12 @@
         .tick.done:hover {
             filter: brightness(1.02);
         }
+
+        .footer-actions {
+            margin-top: 18px;
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 
@@ -507,6 +512,12 @@
                 </div>
             </div>
         </section>
+
+        <div class="footer-actions">
+            <button class="btn btn-primary" id="btnShortcut">
+                <span class="icon">🖥️</span><span>Crea collegamento sul desktop</span>
+            </button>
+        </div>
     </div>
 
     <script>
@@ -812,6 +823,25 @@
             currentWeekStart = getWeekStart(focusDate);
             renderAll();
         });
+
+        function downloadDesktopShortcut() {
+            const url = window.location.href;
+            const name = "Micro Habit Tracker";
+            // Mac (.webloc) format
+            const content = `<?xml version="1.0" encoding="UTF-8"?>\n` +
+                `<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n` +
+                `<plist version="1.0"><dict><key>URL</key><string>${url}</string></dict></plist>`;
+            const blob = new Blob([content], { type: "application/xml" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `${name}.webloc`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        }
+
+        document.getElementById("btnShortcut").addEventListener("click", downloadDesktopShortcut);
 
         let resizeRaf;
         window.addEventListener("resize", () => {
