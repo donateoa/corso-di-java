@@ -21,12 +21,17 @@
             --col-habit: 180px;
             --col-day: 72px;
             --col-gap: 6px;
+            --font-scale: 1;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        html {
+            font-size: calc(16px * var(--font-scale));
         }
 
         body {
@@ -57,6 +62,13 @@
         @media (min-width: 768px) {
             .app {
                 padding: 26px 28px 22px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            body {
+                padding: 2px;
+                font-size: larger;
             }
         }
 
@@ -108,6 +120,50 @@
             gap: 10px;
             flex-wrap: wrap;
             margin: -2px 0 4px;
+        }
+
+        .font-size-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
+
+        .font-size-buttons {
+            display: inline-flex;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            overflow: hidden;
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        .font-btn {
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            padding: 6px 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.12s ease-out, color 0.12s ease-out;
+        }
+
+        .font-btn + .font-btn {
+            border-left: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .font-btn.active {
+            color: var(--text);
+            background: rgba(56, 189, 248, 0.12);
+        }
+
+        .font-btn:hover {
+            color: var(--text);
         }
 
         .badge {
@@ -463,6 +519,14 @@
                     <span class="icon">🧹</span><span>Azzera tutto</span>
                 </button>
             </div>
+            <div class="font-size-control">
+                <span>Dimensione testo:</span>
+                <div class="font-size-buttons" id="fontButtons">
+                    <button class="font-btn" data-scale="0.95" aria-label="Testo compatto">A</button>
+                    <button class="font-btn" data-scale="1.08" aria-label="Testo medio" style="font-size:1.05rem;">A</button>
+                    <button class="font-btn active" data-scale="1.18" aria-label="Testo grande" style="font-size:1.15rem;">A</button>
+                </div>
+            </div>
         </header>
 
         <section class="controls">
@@ -525,6 +589,7 @@
         // Storage & state
         // ------------------------------
         const STORAGE_KEY = "microHabitTracker:v1";
+        const FONT_KEY = "microHabitTracker:fontScale";
 
         const defaultData = {
             habits: [
@@ -814,6 +879,37 @@
             renderAll();
         });
 
+        const fontButtons = Array.from(document.querySelectorAll("#fontButtons .font-btn"));
+
+        function applyFontScale(scale) {
+            document.documentElement.style.setProperty("--font-scale", scale);
+        }
+
+        function loadFontScale() {
+            const stored = localStorage.getItem(FONT_KEY);
+            const defaultScale = "1.18";
+            const scale = stored || defaultScale;
+            applyFontScale(scale);
+            setActiveFontButton(scale);
+        }
+
+        function setActiveFontButton(scale) {
+            fontButtons.forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.scale === scale);
+            });
+        }
+
+        if (fontButtons.length) {
+            fontButtons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const scale = btn.dataset.scale || "1";
+                    applyFontScale(scale);
+                    localStorage.setItem(FONT_KEY, scale);
+                    setActiveFontButton(scale);
+                });
+            });
+        }
+
         document.getElementById("btnReset").addEventListener("click", () => {
             if (!confirm("Vuoi davvero azzerare tutte le abitudini e i segni salvati?")) return;
             state = structuredClone(defaultData);
@@ -855,6 +951,7 @@
         // Init
         // ------------------------------
         initHabitInputs();
+        loadFontScale();
         renderAll();
     </script>
 </body>
