@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Micro Habit Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #020617;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.12);
+            --text: #e5e7eb;
+            --muted: #9ca3af;
+            --border: #1f2933;
+            --danger: #f97373;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --radius-pill: 999px;
+            --col-habit: 180px;
+            --col-day: 72px;
+            --col-gap: 6px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #1f2937 0, #020617 45%, #020617 100%);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .app {
+            width: 100%;
+            max-width: 900px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+            border-radius: 24px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            box-shadow:
+                0 24px 60px rgba(15, 23, 42, 0.8),
+                0 0 0 1px rgba(15, 23, 42, 0.8);
+            padding: 24px 24px 20px;
+            backdrop-filter: blur(22px);
+        }
+
+        @media (min-width: 768px) {
+            .app {
+                padding: 26px 28px 22px;
+            }
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .title-pill {
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            background: radial-gradient(circle at 30% 20%, #38bdf8, #2563eb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                0 0 20px rgba(56, 189, 248, 0.5),
+                0 0 40px rgba(37, 99, 235, 0.4);
+            font-size: 18px;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: var(--muted);
+            max-width: 450px;
+        }
+
+        .status-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: -2px 0 4px;
+        }
+
+        .badge {
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            color: var(--muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7));
+            white-space: nowrap;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: #4ade80;
+            box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2);
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .controls {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-end;
+            }
+        }
+
+        .habits-editor {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .habits-editor-label {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 2px;
+        }
+
+        .habit-input-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .habit-color {
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+            opacity: 0.7;
+        }
+
+        .habit-input {
+            flex: 1;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(15, 23, 42, 0.9);
+            padding: 5px 9px;
+            font-size: 0.8rem;
+            color: var(--text);
+            outline: none;
+        }
+
+        .habit-input::placeholder {
+            color: rgba(148, 163, 184, 0.6);
+        }
+
+        .habit-input:focus {
+            border-color: rgba(56, 189, 248, 0.7);
+            box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            justify-content: flex-start;
+        }
+
+        @media (min-width: 640px) {
+            .actions {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+        }
+
+        .btn {
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--text);
+            font-size: 0.75rem;
+            padding: 6px 10px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.14s ease-out;
+            white-space: nowrap;
+        }
+
+        .btn span.icon {
+            font-size: 0.95em;
+        }
+
+        .btn-primary {
+            border-color: rgba(56, 189, 248, 0.8);
+            background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.15), rgba(15, 23, 42, 1));
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.7);
+        }
+
+        .btn-danger {
+            border-color: rgba(239, 68, 68, 0.8);
+            color: #fecaca;
+            background: radial-gradient(circle at top left, rgba(239, 68, 68, 0.1), rgba(15, 23, 42, 1));
+        }
+
+        /* Week navigation */
+        .week-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            margin-top: 2px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .week-controls {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .week-nav {
+            display: inline-flex;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            overflow: hidden;
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .week-btn {
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: background 0.12s ease-out, color 0.12s ease-out;
+        }
+
+        .week-btn:hover {
+            background: rgba(15, 23, 42, 1);
+            color: var(--text);
+        }
+
+        .week-label {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        .week-label span {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Grid */
+        .grid {
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.05), rgba(15, 23, 42, 0.96));
+            padding: 10px 10px 12px;
+            overflow-x: auto;
+        }
+
+        .grid-inner {
+            min-width: calc(var(--col-habit) + 7 * var(--col-day) + 6 * var(--col-gap));
+            width: fit-content;
+        }
+
+        .grid-inner[data-mode="day"] {
+            min-width: calc(var(--col-habit) + var(--col-day) + var(--col-gap));
+        }
+
+        .grid-header,
+        .grid-row {
+            display: grid;
+            grid-template-columns: var(--col-habit) repeat(7, var(--col-day));
+            column-gap: var(--col-gap);
+            align-items: center;
+        }
+
+        .grid-header[data-mode="day"],
+        .grid-row[data-mode="day"] {
+            grid-template-columns: var(--col-habit) var(--col-day);
+        }
+
+        .grid-header {
+            margin-bottom: 10px;
+            padding: 4px 2px 6px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+            width: 100%;
+        }
+
+        .grid-header[data-mode="day"] {
+            border-bottom: none;
+            padding-bottom: 2px;
+        }
+
+        .grid-header-cell {
+            font-size: 0.7rem;
+            color: var(--muted);
+            padding: 2px 4px;
+            text-align: center;
+            opacity: 0.9;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .grid-header-cell:first-child {
+            text-align: left;
+            padding-left: 6px;
+            align-items: flex-start;
+            text-decoration: none;
+        }
+
+        .day-label-main {
+            display: block;
+            letter-spacing: 0.01em;
+        }
+
+        .day-label-sub {
+            display: block;
+            font-size: 0.68rem;
+            opacity: 0.75;
+        }
+
+        .grid-row {
+            margin-bottom: 5px;
+            width: 100%;
+        }
+
+        .grid-habit {
+            font-size: 0.75rem;
+            padding: 3px 4px 3px 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text);
+            opacity: 0.95;
+        }
+
+        .grid-habit span.name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .grid-cell {
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tick {
+            width: 26px;
+            height: 26px;
+            border-radius: 9px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.12s ease-out;
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .tick.empty:hover {
+            border-color: rgba(56, 189, 248, 0.9);
+            box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .tick.done {
+            border-color: rgba(56, 189, 248, 0.0);
+            background: radial-gradient(circle at 30% 10%, rgba(56, 189, 248, 0.95), #22c55e);
+            box-shadow:
+                0 0 12px rgba(34, 197, 94, 0.5),
+                0 0 24px rgba(56, 189, 248, 0.4);
+            color: #0b1120;
+            font-weight: 600;
+            transform: translateY(-0.5px);
+        }
+
+        .tick.done:hover {
+            filter: brightness(1.02);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="header-top">
+                <div>
+                    <div class="title">
+                        <div class="title-pill">✓</div>
+                        <span>Micro Habit Tracker</span>
+                    </div>
+                    <p class="subtitle">
+                        Scegli al massimo tre micro-abitudini e metti un segno ogni giorno.
+                    </p>
+                </div>
+            </div>
+            <div class="status-row">
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    <span>Salvato sul tuo browser</span>
+                </div>
+                <button class="btn btn-danger" id="btnReset">
+                    <span class="icon">🧹</span><span>Azzera tutto</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="controls">
+            <div class="habits-editor">
+                <div class="habits-editor-label">Le tue micro-abitudini (max 3)</div>
+                <div class="habit-input-row">
+                    <div class="habit-color" style="background:#38bdf8;"></div>
+                    <input class="habit-input" data-index="0" placeholder="Es. Leggere 10 minuti" autocomplete="off" />
+                </div>
+                <div class="habit-input-row">
+                    <div class="habit-color" style="background:#a855f7;"></div>
+                    <input class="habit-input" data-index="1" placeholder="Es. Una frase di inglese"
+                        autocomplete="off" />
+                </div>
+                <div class="habit-input-row">
+                    <div class="habit-color" style="background:#f97316;"></div>
+                    <input class="habit-input" data-index="2" placeholder="Es. 5 min di stretching"
+                        autocomplete="off" />
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="week-bar">
+                <div class="week-controls">
+                    <button class="btn btn-primary" id="btnToday">
+                        <span class="icon">📍</span><span>Vai a questa settimana</span>
+                    </button>
+                    <div class="week-nav">
+                        <button class="week-btn" id="btnPrevWeek">
+                            <span>←</span><span>Settimana prec.</span>
+                        </button>
+                        <button class="week-btn" id="btnNextWeek">
+                            <span>Settimana succ.</span><span>→</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="week-label" id="weekLabel">
+                    <span id="modeLabel">Settimana</span> <span id="weekLabelRange"></span>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="grid-inner">
+                    <div class="grid-header" id="gridHeader"></div>
+                    <div id="gridBody"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // ------------------------------
+        // Storage & state
+        // ------------------------------
+        const STORAGE_KEY = "microHabitTracker:v1";
+
+        const defaultData = {
+            habits: [
+                "Leggere 10 minuti",
+                "Una frase di inglese",
+                "5 minuti di stretching"
+            ],
+            days: {} // chiave: "YYYY-MM-DD" → array[3] di boolean
+        };
+
+        let state = loadState();
+        let focusDate = new Date(); // giorno attivo (oggi di default)
+        let currentWeekStart = getWeekStart(focusDate); // lunedì della settimana corrente
+        let viewMode = "week"; // "week" | "day" gestito in base allo spazio disponibile
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return structuredClone(defaultData);
+                const parsed = JSON.parse(raw);
+                // Normalizzazione semplice
+                if (!Array.isArray(parsed.habits) || parsed.habits.length !== 3) {
+                    parsed.habits = structuredClone(defaultData.habits);
+                }
+                if (!parsed.days || typeof parsed.days !== "object") {
+                    parsed.days = {};
+                }
+                return parsed;
+            } catch (e) {
+                console.warn("Errore nel parsing dello stato, reset:", e);
+                return structuredClone(defaultData);
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        // ------------------------------
+        // Date utils
+        // ------------------------------
+        function toISODate(date) {
+            const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+            return d.toISOString().slice(0, 10);
+        }
+
+        function getWeekStart(date) {
+            const d = new Date(date);
+            const day = d.getDay(); // 0 = Domenica, 1 = Lun
+            const diff = (day === 0 ? -6 : 1 - day); // lunedì come inizio
+            d.setDate(d.getDate() + diff);
+            d.setHours(0, 0, 0, 0);
+            return d;
+        }
+
+        function addDays(date, n) {
+            const d = new Date(date);
+            d.setDate(d.getDate() + n);
+            return d;
+        }
+
+        function formatDayLabel(date) {
+            return date.toLocaleDateString("it-IT", {
+                weekday: "short"
+            });
+        }
+
+        function formatSubLabel(date) {
+            return date.toLocaleDateString("it-IT", {
+                day: "2-digit",
+                month: "2-digit"
+            });
+        }
+
+        function formatWeekRange(start) {
+            const end = addDays(start, 6);
+            const opts = { day: "2-digit", month: "2-digit" };
+            const s = start.toLocaleDateString("it-IT", opts);
+            const e = end.toLocaleDateString("it-IT", opts);
+            return s + " – " + e;
+        }
+
+        function formatDayFull(date) {
+            return date.toLocaleDateString("it-IT", {
+                weekday: "short",
+                day: "2-digit",
+                month: "2-digit"
+            });
+        }
+
+        function getCssNumber(varName) {
+            const raw = getComputedStyle(document.documentElement).getPropertyValue(varName);
+            return Number(raw.replace("px", "").trim()) || 0;
+        }
+
+        function detectViewMode() {
+            const gridEl = document.querySelector(".grid");
+            const available = gridEl?.clientWidth || window.innerWidth;
+            const colHabit = getCssNumber("--col-habit") || 180;
+            const colDay = getCssNumber("--col-day") || 72;
+            const gap = getCssNumber("--col-gap") || 6;
+            const weekWidth = colHabit + 7 * colDay + 6 * gap;
+            const paddingBuffer = 12;
+            return available < weekWidth + paddingBuffer ? "day" : "week";
+        }
+
+        // ------------------------------
+        // Rendering
+        // ------------------------------
+        const gridHeaderEl = document.getElementById("gridHeader");
+        const gridBodyEl = document.getElementById("gridBody");
+        const gridInnerEl = document.querySelector(".grid-inner");
+        const modeLabelEl = document.getElementById("modeLabel");
+        const weekLabelRangeEl = document.getElementById("weekLabelRange");
+        const prevWeekLabelEl = document.querySelector("#btnPrevWeek span:nth-child(2)");
+        const nextWeekLabelEl = document.querySelector("#btnNextWeek span:nth-child(1)");
+
+        function renderHeader() {
+            gridHeaderEl.innerHTML = "";
+            const row = document.createElement("div");
+            row.className = "grid-header";
+
+            const firstCell = document.createElement("div");
+            firstCell.className = "grid-header-cell";
+            firstCell.textContent = "Abitudine";
+            row.appendChild(firstCell);
+
+            if (viewMode === "week") {
+                for (let i = 0; i < 7; i++) {
+                    const d = addDays(currentWeekStart, i);
+                    const cell = document.createElement("div");
+                    cell.className = "grid-header-cell";
+                    const main = document.createElement("span");
+                    main.className = "day-label-main";
+                    main.textContent = formatDayLabel(d);
+                    const sub = document.createElement("span");
+                    sub.className = "day-label-sub";
+                    sub.textContent = formatSubLabel(d);
+                    cell.appendChild(main);
+                    cell.appendChild(sub);
+                    row.appendChild(cell);
+                }
+            } else {
+                const cell = document.createElement("div");
+                cell.className = "grid-header-cell";
+                const main = document.createElement("span");
+                main.className = "day-label-main";
+                main.textContent = formatDayLabel(focusDate);
+                const sub = document.createElement("span");
+                sub.className = "day-label-sub";
+                sub.textContent = formatSubLabel(focusDate);
+                cell.appendChild(main);
+                cell.appendChild(sub);
+                row.appendChild(cell);
+            }
+
+            row.dataset.mode = viewMode;
+            gridHeaderEl.appendChild(row);
+
+            modeLabelEl.textContent = viewMode === "week" ? "Settimana" : "Giorno";
+            weekLabelRangeEl.textContent = viewMode === "week"
+                ? formatWeekRange(currentWeekStart)
+                : formatDayFull(focusDate);
+            prevWeekLabelEl.textContent = viewMode === "week" ? "Settimana prec." : "Giorno prec.";
+            nextWeekLabelEl.textContent = viewMode === "week" ? "Settimana succ." : "Giorno succ.";
+        }
+
+        function ensureDayArray(dateKey) {
+            if (!state.days[dateKey]) {
+                state.days[dateKey] = [false, false, false];
+            } else if (!Array.isArray(state.days[dateKey]) || state.days[dateKey].length !== 3) {
+                state.days[dateKey] = [false, false, false];
+            }
+        }
+
+        function renderBody() {
+            gridBodyEl.innerHTML = "";
+
+            const daysToShow = viewMode === "week" ? 7 : 1;
+            const baseDate = viewMode === "week" ? currentWeekStart : focusDate;
+
+            for (let habitIdx = 0; habitIdx < 3; habitIdx++) {
+                const row = document.createElement("div");
+                row.className = "grid-row";
+
+                const habitCell = document.createElement("div");
+                habitCell.className = "grid-habit";
+                const pill = document.createElement("span");
+                pill.style.width = "8px";
+                pill.style.height = "8px";
+                pill.style.borderRadius = "999px";
+                pill.style.flexShrink = "0";
+
+                if (habitIdx === 0) pill.style.background = "#38bdf8";
+                if (habitIdx === 1) pill.style.background = "#a855f7";
+                if (habitIdx === 2) pill.style.background = "#f97316";
+
+                const name = document.createElement("span");
+                name.className = "name";
+                name.textContent = state.habits[habitIdx] || `Abitudine ${habitIdx + 1}`;
+
+                habitCell.appendChild(pill);
+                habitCell.appendChild(name);
+                row.appendChild(habitCell);
+
+                for (let dayOffset = 0; dayOffset < daysToShow; dayOffset++) {
+                    const d = viewMode === "week" ? addDays(baseDate, dayOffset) : baseDate;
+                    const dateKey = toISODate(d);
+                    ensureDayArray(dateKey);
+
+                    const cell = document.createElement("div");
+                    cell.className = "grid-cell";
+
+                    const tick = document.createElement("button");
+                    tick.type = "button";
+                    tick.className = "tick";
+                    const done = !!state.days[dateKey][habitIdx];
+
+                    if (done) {
+                        tick.classList.add("done");
+                        tick.innerHTML = "✓";
+                    } else {
+                        tick.classList.add("empty");
+                        tick.innerHTML = "";
+                    }
+
+                    tick.addEventListener("click", () => {
+                        state.days[dateKey][habitIdx] = !state.days[dateKey][habitIdx];
+                        saveState();
+                        renderBody();
+                    });
+
+                    cell.appendChild(tick);
+                    row.appendChild(cell);
+                }
+
+                row.dataset.mode = viewMode;
+                gridBodyEl.appendChild(row);
+            }
+        }
+
+        function renderAll() {
+            viewMode = detectViewMode();
+            gridInnerEl.dataset.mode = viewMode;
+            renderHeader();
+            renderBody();
+        }
+
+        // ------------------------------
+        // Habit inputs
+        // ------------------------------
+        const habitInputs = document.querySelectorAll(".habit-input");
+
+        function initHabitInputs() {
+            habitInputs.forEach(input => {
+                const i = Number(input.dataset.index || "0");
+                input.value = state.habits[i] || "";
+                input.addEventListener("change", e => {
+                    const value = (e.target.value || "").trim();
+                    state.habits[i] = value || defaultData.habits[i];
+                    saveState();
+                    renderBody();
+                });
+            });
+        }
+
+        // ------------------------------
+        // Buttons
+        // ------------------------------
+        document.getElementById("btnPrevWeek").addEventListener("click", () => {
+            const step = viewMode === "week" ? -7 : -1;
+            focusDate = addDays(focusDate, step);
+            currentWeekStart = getWeekStart(focusDate);
+            renderAll();
+        });
+
+        document.getElementById("btnNextWeek").addEventListener("click", () => {
+            const step = viewMode === "week" ? 7 : 1;
+            focusDate = addDays(focusDate, step);
+            currentWeekStart = getWeekStart(focusDate);
+            renderAll();
+        });
+
+        document.getElementById("btnToday").addEventListener("click", () => {
+            focusDate = new Date();
+            currentWeekStart = getWeekStart(focusDate);
+            renderAll();
+        });
+
+        document.getElementById("btnReset").addEventListener("click", () => {
+            if (!confirm("Vuoi davvero azzerare tutte le abitudini e i segni salvati?")) return;
+            state = structuredClone(defaultData);
+            saveState();
+            initHabitInputs();
+            focusDate = new Date();
+            currentWeekStart = getWeekStart(focusDate);
+            renderAll();
+        });
+
+        let resizeRaf;
+        window.addEventListener("resize", () => {
+            cancelAnimationFrame(resizeRaf);
+            resizeRaf = requestAnimationFrame(() => {
+                renderAll();
+            });
+        });
+
+        // ------------------------------
+        // Init
+        // ------------------------------
+        initHabitInputs();
+        renderAll();
+    </script>
+</body>
+
+</html>
