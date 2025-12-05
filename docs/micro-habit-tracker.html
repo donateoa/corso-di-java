@@ -492,6 +492,8 @@
             margin-top: 18px;
             display: flex;
             justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
     </style>
 </head>
@@ -578,6 +580,9 @@
         </section>
 
         <div class="footer-actions">
+            <button class="btn btn-primary" id="btnCalendar">
+                <span class="icon">📅</span><span>Pianifica su Google Calendar</span>
+            </button>
             <button class="btn btn-primary" id="btnShortcut">
                 <span class="icon">🖥️</span><span>Crea collegamento sul desktop</span>
             </button>
@@ -683,6 +688,23 @@
         function getCssNumber(varName) {
             const raw = getComputedStyle(document.documentElement).getPropertyValue(varName);
             return Number(raw.replace("px", "").trim()) || 0;
+        }
+
+        function pad2(n) {
+            return String(n).padStart(2, "0");
+        }
+
+        function toCalendarTimestamp(date) {
+            return (
+                date.getUTCFullYear() +
+                pad2(date.getUTCMonth() + 1) +
+                pad2(date.getUTCDate()) +
+                "T" +
+                pad2(date.getUTCHours()) +
+                pad2(date.getUTCMinutes()) +
+                pad2(date.getUTCSeconds()) +
+                "Z"
+            );
         }
 
         function detectViewMode() {
@@ -920,6 +942,21 @@
             renderAll();
         });
 
+        function buildCalendarUrl() {
+            const now = new Date();
+            const start = new Date(now.getTime() + 5 * 60 * 1000); // tra 5 minuti
+            const end = new Date(start.getTime() + 10 * 60 * 1000); // durata 10 minuti
+            const base = "https://calendar.google.com/calendar/render";
+            const params = new URLSearchParams({
+                action: "TEMPLATE",
+                text: "Micro Habit Tracker",
+                details: "Apri app: https://donateoa.github.io/corso-di-java/micro-habit-tracker.html",
+                recur: "RRULE:FREQ=DAILY",
+                dates: `${toCalendarTimestamp(start)}/${toCalendarTimestamp(end)}`
+            });
+            return `${base}?${params.toString()}`;
+        }
+
         function downloadDesktopShortcut() {
             const url = window.location.href;
             const name = "Micro Habit Tracker";
@@ -938,6 +975,10 @@
         }
 
         document.getElementById("btnShortcut").addEventListener("click", downloadDesktopShortcut);
+        document.getElementById("btnCalendar").addEventListener("click", () => {
+            const url = buildCalendarUrl();
+            window.open(url, "_blank", "noopener");
+        });
 
         let resizeRaf;
         window.addEventListener("resize", () => {
