@@ -1,0 +1,30 @@
+{
+    "questions": [
+        {
+            "text": "Qual è la complessità computazionale del meccanismo di attention?",
+            "options": [
+                "O(1)",
+                "O(log N)",
+                "O(N)",
+                "O(N^2)"
+            ],
+            "correct": [
+                3
+            ],
+            "answer": "La complessità computazionale del transformer è quadratica."
+        },
+        {
+            "text": "Cos'è l'effetto 'Lost in the middle'?",
+            "options": [
+                "Un errore di rete in cui il pacchetto si disperde nel firewall.",
+                "Un bug degli LLM open-source.",
+                "Il fenomeno per cui l'LLM presta meno attenzione ai token situati al centro di un prompt lungo.",
+                "L'incapacità dell'LLM di rispondere a domande molto corte."
+            ],
+            "correct": [
+                2
+            ],
+            "answer": "Gli LLM mostrano primacy bias (prestano attenzione all'inizio) e recency bias (prestano attenzione alla fine del prompt)."
+        }
+    ]
+}

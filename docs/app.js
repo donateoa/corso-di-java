@@ -4,6 +4,8 @@ const courses = [
   { id: "ai", name: "Spring + AI", level: "intermediate", json: "./json/ai.json" },
   { id: "rest", name: "REST", level: "basic", json: "./json/rest.json" },
   { id: "springsecurity", name: "Spring Security", level: "intermediate", json: "./json/springsecurity.json" },
+  { id: "cap1", name: "AI Architect - Cap.1: Chiamata LLM", level: "base", json: "./json/cap1.json" },
+  { id: "cap2", name: "AI Architect - Cap.2: Contesto e Attention", level: "intermedio", json: "./json/cap2.json" },
 ];
 
 const state = {
@@ -227,4 +229,17 @@ submitBtn.addEventListener("click", checkAnswer);
 nextBtn.addEventListener("click", nextQuestion);
 backBtn.addEventListener("click", goHome);
 
-loadCounts();
+// Auto-start: if URL contains ?cap=cap1, skip home and start quiz directly
+async function init() {
+  await loadCounts();
+  const params = new URLSearchParams(window.location.search);
+  const autoCap = params.get("cap");
+  if (autoCap) {
+    const course = courses.find((c) => c.id === autoCap);
+    if (course) {
+      startCourse(autoCap);
+    }
+  }
+}
+
+init();

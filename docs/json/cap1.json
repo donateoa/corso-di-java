@@ -1,0 +1,43 @@
+{
+    "questions": [
+        {
+            "text": "Dal punto di vista ingegneristico, cos'è un LLM?",
+            "options": [
+                "Un database di documenti",
+                "Una funzione pura che mappa token di input in token di output",
+                "Un motore di ricerca in tempo reale sulle API web",
+                "Un sistema cosciente che ricorda le iterazioni precedenti in memoria"
+            ],
+            "correct": [
+                1
+            ],
+            "answer": "L'LLM trasforma seq. vettori in modo quasi-deterministico. Non ha memoria propria."
+        },
+        {
+            "text": "La natura 'stateless' degli LLM comporta che...",
+            "options": [
+                "il modello salvi automaticamente i messaggi su un file testuale.",
+                "il modello abbia un limite di token più basso.",
+                "l'onere di mantenere e iniettare la cronologia della chat spetti all'AI Engineer.",
+                "la chiamata non possa mai fallire per timeout."
+            ],
+            "correct": [
+                2
+            ],
+            "answer": "L'ingegnere deve concatenare e orchestrare i messaggi da passare."
+        },
+        {
+            "text": "Cos'è il Prompt Budget?",
+            "options": [
+                "Il costo per acquistare un modello open-source.",
+                "La finestra di attenzione massima, calcolata in GPU ed elettricità.",
+                "Il numero totale di prompt che possono essere generati in una giornata.",
+                "Il limite tecnico ed economico (finestra di contesto in token e i costi API $ per l'esecuzione)."
+            ],
+            "correct": [
+                3
+            ],
+            "answer": "Bisogna tenere conto sia del budget di token massimi gestibili (es: 128k) sia del costo economico."
+        }
+    ]
+}
