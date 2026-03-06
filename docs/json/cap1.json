@@ -3,41 +3,138 @@
         {
             "text": "Dal punto di vista ingegneristico, cos'è un LLM?",
             "options": [
-                "Un database di documenti",
+                "Un database di documenti indicizzati",
                 "Una funzione pura che mappa token di input in token di output",
-                "Un motore di ricerca in tempo reale sulle API web",
-                "Un sistema cosciente che ricorda le iterazioni precedenti in memoria"
+                "Un motore di ricerca in tempo reale sulle API",
+                "Un sistema cosciente con memoria a lungo termine integrata"
             ],
             "correct": [
-                1
+                "B"
             ],
-            "answer": "L'LLM trasforma seq. vettori in modo quasi-deterministico. Non ha memoria propria."
+            "answer": "L'LLM è stateless e quasi-deterministico: trasforma sequenze di vettori senza 'ricordare' nulla."
         },
         {
-            "text": "La natura 'stateless' degli LLM comporta che...",
+            "text": "Quali affermazioni sulla natura 'stateless' sono corrette? (Risposta Multipla)",
             "options": [
-                "il modello salvi automaticamente i messaggi su un file testuale.",
-                "il modello abbia un limite di token più basso.",
-                "l'onere di mantenere e iniettare la cronologia della chat spetti all'AI Engineer.",
-                "la chiamata non possa mai fallire per timeout."
+                "Il modello non ricorda i messaggi precedenti tra una chiamata e l'altra",
+                "L'LLM salva la cronologia su un database interno di OpenAI/Anthropic",
+                "L'AI Engineer deve re-inviare l'intera chat ad ogni nuova interazione",
+                "Il server dimentica i dati per motivi di privacy"
             ],
             "correct": [
-                2
+                "A",
+                "C"
             ],
-            "answer": "L'ingegnere deve concatenare e orchestrare i messaggi da passare."
+            "answer": "La statelessness implica che ogni richiesta sia atomica; la memoria è un'illusione creata dall'orchestratore."
         },
         {
             "text": "Cos'è il Prompt Budget?",
             "options": [
-                "Il costo per acquistare un modello open-source.",
-                "La finestra di attenzione massima, calcolata in GPU ed elettricità.",
-                "Il numero totale di prompt che possono essere generati in una giornata.",
-                "Il limite tecnico ed economico (finestra di contesto in token e i costi API $ per l'esecuzione)."
+                "La quantità di denaro massima spendibile in un mese",
+                "Il numero di persone che possono usare l'AI",
+                "Il limite combinato di token massimi gestibili e costo economico della chiamata",
+                "La velocità di risposta del modello"
             ],
             "correct": [
-                3
+                "C"
             ],
-            "answer": "Bisogna tenere conto sia del budget di token massimi gestibili (es: 128k) sia del costo economico."
+            "answer": "Bisogna bilanciare i limiti tecnici (context window) con quelli finanziari ($ per milione di token)."
+        },
+        {
+            "text": "Quali componenti fanno solitamente parte del Model Set Context (MSC)? (Risposta Multipla)",
+            "options": [
+                "Il framework o linguaggio di programmazione usato nel progetto",
+                "Lo stile di risposta richiesto (es. conciso, tecnico)",
+                "La temperatura di campionamento del modello",
+                "Le preferenze sulle librerie da evitare"
+            ],
+            "correct": [
+                "A",
+                "B",
+                "D"
+            ],
+            "answer": "L'MSC definisce l'identità e il dominio del progetto, a differenza della Chat History."
+        },
+        {
+            "text": "In quale sezione del prompt viene solitamente inserito l'MSC?",
+            "options": [
+                "User Message",
+                "System Message (o System Instructions)",
+                "Assistant Message",
+                "In un file PDF allegato separatamente"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "Il System Message è il luogo ideale per istruzioni di alto livello e contesto di progetto."
+        },
+        {
+            "text": "Qual è l'unità di misura fondamentale processata da un Transformer?",
+            "options": [
+                "Caratteri",
+                "Parole intere",
+                "Token (sotto-parti di parole)",
+                "Byte"
+            ],
+            "correct": [
+                "C"
+            ],
+            "answer": "Il tokenizer spezza il testo in token; circa 750 parole corrispondono a 1000 token."
+        },
+        {
+            "text": "Cosa succede se si supera il limite massimo di token (Context Window)?",
+            "options": [
+                "Il modello risponde più lentamente ma correttamente",
+                "L'API restituisce un errore o taglia (tronca) il testo in input",
+                "Il costo della chiamata diventa gratuito dopo il limite",
+                "Il modello inizia a inventare fatti storici"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "Superare la finestra di contesto causa errori di sistema o perdita di informazioni critiche."
+        },
+        {
+            "text": "Perché la tokenizzazione è importante per un AI Architect? (Risposta Multipla)",
+            "options": [
+                "Perché determina la precisione del ragionamento logico",
+                "Perché influenza direttamente i costi delle API",
+                "Perché determina quanti dati possiamo inserire nel prompt",
+                "Perché permette di tradurre il codice in bit"
+            ],
+            "correct": [
+                "B",
+                "C"
+            ],
+            "answer": "I token sono la valuta sia tecnica (limiti) che economica (costi) dei sistemi LLM."
+        },
+        {
+            "text": "Differenza tra Modello 'Base' e Modello 'Instruct'?",
+            "options": [
+                "Nessuna, sono sinonimi",
+                "Il modello Instruct è rifinito (fine-tuned) per seguire ordini e rispondere a domande",
+                "Il modello Base è più intelligente",
+                "Il modello Instruct non usa i token"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "I modelli Base sono predittori di testo; quelli Instruct sono addestrati per l'interazione umana."
+        },
+        {
+            "text": "Quali di questi sono esempi di 'System Instructions' efficaci? (Risposta Multipla)",
+            "options": [
+                "'Sei un esperto Java Senior'",
+                "'Usa sempre il formato JSON per l'output'",
+                "'Ciao come stai?'",
+                "'Non citare mai competitor del brand X'"
+            ],
+            "correct": [
+                "A",
+                "B",
+                "D"
+            ],
+            "answer": "Ruolo, formato e vincoli sono i pilastri di un System Prompt professionale."
         }
     ]
 }

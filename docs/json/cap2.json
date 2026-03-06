@@ -3,28 +3,139 @@
         {
             "text": "Qual è la complessità computazionale del meccanismo di attention?",
             "options": [
-                "O(1)",
-                "O(log N)",
-                "O(N)",
-                "O(N^2)"
+                "Lineare (O(N))",
+                "Logaritmica (O(log N))",
+                "Costante (O(1))",
+                "Quadratica (O(N^2))"
             ],
             "correct": [
-                3
+                "D"
             ],
-            "answer": "La complessità computazionale del transformer è quadratica."
+            "answer": "Se raddoppi il numero di token, il calcolo necessario quadruplica."
         },
         {
-            "text": "Cos'è l'effetto 'Lost in the middle'?",
+            "text": "Cos'è l'effetto 'Lost in the Middle'?",
             "options": [
-                "Un errore di rete in cui il pacchetto si disperde nel firewall.",
-                "Un bug degli LLM open-source.",
-                "Il fenomeno per cui l'LLM presta meno attenzione ai token situati al centro di un prompt lungo.",
-                "L'incapacità dell'LLM di rispondere a domande molto corte."
+                "Un errore di rete che causa messaggi persi",
+                "Il calo di performance del modello su token al centro di prompt lunghi",
+                "L'incapacità dell'AI di ricordare i nomi degli utenti",
+                "Un bug degli LLM open-source"
             ],
             "correct": [
-                2
+                "B"
             ],
-            "answer": "Gli LLM mostrano primacy bias (prestano attenzione all'inizio) e recency bias (prestano attenzione alla fine del prompt)."
+            "answer": "I modelli faticano a recuperare informazioni dal centro della finestra di contesto."
+        },
+        {
+            "text": "Quali affermazioni sulla VRAM sono esatte? (Risposta Multipla)",
+            "options": [
+                "È meno abbondante della RAM di sistema",
+                "È usata per calcolare le matrici di attenzione delle GPU",
+                "Costa molto meno della RAM classica",
+                "Un superamento della VRAM può causare errori di sistema (OOM)"
+            ],
+            "correct": [
+                "A",
+                "B",
+                "D"
+            ],
+            "answer": "La VRAM è limitata (es. 80GB per una H100) ma estremamente veloce."
+        },
+        {
+            "text": "Qual è il vantaggio della tecnica 'Prompt Sandwich'?",
+            "options": [
+                "Non serve a nulla, è un'estetica del codice",
+                "Aiuta a combattere il Lost in the Middle ripetendo istruzioni chiave",
+                "Consuma meno token del prompt budget",
+                "Sostituisce il System Message"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "Ripetere le istruzioni critiche alla fine del prompt rinforza l'attenzione del modello."
+        },
+        {
+            "text": "Quali di queste sono strategie di gestione della memoria (Context Management)? (Risposta Multipla)",
+            "options": [
+                "Truncation (Taglio dei messaggi vecchi)",
+                "Sliding Window (Finestra mobile degli ultimi N messaggi)",
+                "Summarization (Riassunto automatico della storia)",
+                "Compressione dei vettori"
+            ],
+            "correct": [
+                "A",
+                "B",
+                "C"
+            ],
+            "answer": "Ogni strategia bilancia informazione, costi e amnesia del modello."
+        },
+        {
+            "text": "Perché un AI Architect deve conoscere la complessità quadratica dell'attenzione?",
+            "options": [
+                "Perché determina se il modello è capace di intendere e volere",
+                "Perché spiega i tempi di latenza crescenti all'aumentare dei token",
+                "Perché aiuta a scegliere il font del sito web",
+                "Perché incide sul consumo di memoria delle schede video"
+            ],
+            "correct": [
+                "B",
+                "D"
+            ],
+            "answer": "Contesti lunghi richiedono hardware massiccio e aumentano il tempo di risposta (TTFT)."
+        },
+        {
+            "text": "Cos'è la 'Vector Memory' applicata alla cronologia?",
+            "options": [
+                "Un modo per salvare i file Word nel prompt",
+                "Un sistema che recupera vecchi messaggi tramite similarità semantica dalla cache",
+                "Un tipo di RAM meccanica",
+                "Un'illusione creata dai modelli di linguaggio"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "Invece di inviare tutta la chat, invii solo i blocchi storici rilevanti per la query attuale."
+        },
+        {
+            "text": "La frase 'Il modello è un probabilistic engine' significa che... (Risposta Multipla)",
+            "options": [
+                "Non può garantire determinismo assoluto al 100%",
+                "Segue le regole logiche del codice Java senza errori",
+                "Calcola la probabilità statistica del prossimo token",
+                "Può commettere allucinazioni o errori di conformità"
+            ],
+            "correct": [
+                "A",
+                "C",
+                "D"
+            ],
+            "answer": "Non è un motore logico simbolico, ma un motore predittivo statistico."
+        },
+        {
+            "text": "Cos'è l'errore 'Out of Memory' (OOM) in una pipeline AI?",
+            "options": [
+                "L'utente ha finito il saldo sulla carta di credito",
+                "Il prompt è così lungo che i parametri non entrano più nella memoria video",
+                "Il server ha perso la connessione internet",
+                "Il modello non riconosce più l'indice dei PDF"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "È un crash tecnico dovuto all'impossibilità fisica di allocare spazio sulla GPU."
+        },
+        {
+            "text": "Qual è la differenza fondamentale tra RAM (CPU) e VRAM (GPU)?",
+            "options": [
+                "La RAM è molto più veloce della VRAM",
+                "La VRAM ha banda passante immensamente superiore (TB/s) per calcolo parallelo",
+                "Sono la stessa risorsa divisa dal sistema operativo",
+                "La VRAM serve solo per giocare ai videogiochi"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "La velocità e banda della VRAM permettono il calcolo parallelo necessario ai LLM."
         }
     ]
 }
