@@ -8,6 +8,7 @@ const courses = [
   { id: "cap2", name: "AI Architect - Cap.2: Contesto e Attention", level: "intermedio", json: "./json/cap2.json" },
   { id: "cap3", name: "AI Architect - Cap.3: Orchestrazione e Agenti", level: "avanzato", json: "./json/cap3.json" },
   { id: "cap4", name: "AI Architect - Cap.4: Valutazione e Fine-Tuning", level: "avanzato", json: "./json/cap4.json" },
+  { id: "cap5", name: "AI Architect - Cap.5: Deployment e Sicurezza", level: "esperto", json: "./json/cap5.json" },
 ];
 
 const state = {

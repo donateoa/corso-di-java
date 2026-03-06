@@ -1,0 +1,140 @@
+{
+    "questions": [
+        {
+            "text": "Cos'è vLLM e qual è la sua innovazione principale?",
+            "options": [
+                "Un database vettoriale per Python",
+                "Un motore di inferenza efficiente basato sulla PagedAttention",
+                "Un modello di linguaggio di Google",
+                "Una libreria per l'addestramento distribuito"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "vLLM usa la PagedAttention per gestire la memoria video KV in modo non contiguo, riducendo lo spreco di VRAM."
+        },
+        {
+            "text": "Caratteristica principale della PagedAttention? (Risposta Multipla)",
+            "options": [
+                "Ispirata alla gestione della memoria virtuale dei SO",
+                "Permette di gestire la KV cache in modo non contiguo",
+                "Riduce drasticamente lo spreco di VRAM nelle GPU",
+                "Consente di caricare più modelli diversi contemporaneamente"
+            ],
+            "correct": [
+                "A",
+                "B",
+                "C"
+            ],
+            "answer": "La PagedAttention rivoluziona il serving di LLM permettendo il batching dinamico degli utenti sulla stessa memoria."
+        },
+        {
+            "text": "Quale formato di quantizzazione è ottimizzato per Apple Silicon (M1/M2/M3)?",
+            "options": [
+                "GPTQ",
+                "AWQ",
+                "GGUF",
+                "Floating-point 64"
+            ],
+            "correct": [
+                "C"
+            ],
+            "answer": "Il formato GGUF è lo standard per far girare modelli ottimizzati su CPU e hardware Apple (unified memory)."
+        },
+        {
+            "text": "Benefici della quantizzazione a 4-bit? (Risposta Multipla)",
+            "options": [
+                "Il modello occupa circa un quarto dello spazio originale",
+                "Perdita di intelligenza quasi impercettibile su task RAG",
+                "Permette di caricare modelli enormi su singole GPU consumer",
+                "Il modello diventa capace di generare immagini con testo perfetto"
+            ],
+            "correct": [
+                "A",
+                "B",
+                "C"
+            ],
+            "answer": "La quantizzazione è la chiave per democratizzare l'uso di LLM potenti su hardware accessibile."
+        },
+        {
+            "text": "Come funziona il 'Semantic Caching'?",
+            "options": [
+                "Salva ogni risposta in un file di testo",
+                "Controlla se una nuova domanda è semanticamente simile (es. cosine similarity > 0.95) a una già risposta in cache",
+                "Ricarica i pesi del modello ogni ora",
+                "Sostituisce il Vector DB con un database SQL"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "Il Semantic Caching riduce latenza e costi restituendo risposte già pronte per domande equivalenti."
+        },
+        {
+            "text": "Esempi tipici di attacchi alla sicurezza generativa? (Risposta Multipla)",
+            "options": [
+                "Prompt Injection (sovrascrivere il System Prompt)",
+                "Jailbreaking (eludere i filtri di sicurezza)",
+                "SQL Injection nei prompt",
+                "Sottrazione di PII (dati sensibili) dai log del sistema"
+            ],
+            "correct": [
+                "A",
+                "B",
+                "D"
+            ],
+            "answer": "L'AI Engineer deve proteggere il sistema da input maligni e fughe di dati sensibili."
+        },
+        {
+            "text": "Piattaforma di Guardrails per la validazione in tempo reale degli input/output?",
+            "options": [
+                "NeMo Guardrails / Llama Guard",
+                "Docker Desktop",
+                "Visual Studio Code",
+                "GitHub Actions"
+            ],
+            "correct": [
+                "A"
+            ],
+            "answer": "I Guardrails sono modelli o sistemi di filtri che garantiscono la sicurezza 'al volo' di ogni interazione."
+        },
+        {
+            "text": "Significato di 'Cold Start Latency' in un'architettura AI?",
+            "options": [
+                "Il tempo in cui la GPU deve riscaldarsi",
+                "Il tempo necessario per caricare il modello o il DB vettoriale quando non sono pronti in memoria",
+                "L'attesa dell'utente per scrivere un prompt",
+                "L'intervallo tra due aggiornamenti del dataset"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "In ambienti serverless, il tempo di caricamento dei pesi (GB) può causare ritardi critici."
+        },
+        {
+            "text": "Quale competenza riguarda il bilanciamento tra velocità di risposta e precisione del dato recuperato?",
+            "options": [
+                "Recall vs Latency trade-off",
+                "ANN Indexing",
+                "Chunk size optimization",
+                "Prompt engineering"
+            ],
+            "correct": [
+                "A"
+            ],
+            "answer": "Gestire la latenza accettabile per l'utente rispetto alla precisione del recupero è una scelta architettonica senior."
+        },
+        {
+            "text": "Cos'è l'ANNi (Approximate Nearest Neighbors) Indexing?",
+            "options": [
+                "Un modo per calcolare i prezzi delle API",
+                "Algoritmi (es. HNSW) per trovare vettori simili velocemente su milioni di record",
+                "Una tecnica di protezione contro gli hacker",
+                "Il processo di traduzione simultanea dell'AI"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "ANN è fondamentale per rendere il RAG scalabile a livello enterprise."
+        }
+    ]
+}
