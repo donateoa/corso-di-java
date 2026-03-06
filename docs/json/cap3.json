@@ -1,0 +1,139 @@
+{
+    "questions": [
+        {
+            "text": "Qual è la differenza principale tra Orchestrazione e Agenti?",
+            "options": [
+                "L'orchestrazione è più veloce degli agenti",
+                "L'orchestratore segue un flusso predefinito (spartito), l'agente decide autonomamente i passi da compiere",
+                "Gli agenti non usano gli LLM",
+                "L'orchestrazione serve solo per caricare PDF"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "L'orchestratore è deterministico; l'agente usa il ragionamento del modello per scegliere i tool."
+        },
+        {
+            "text": "Cos'è la 'Function Calling' (Tool Use)?",
+            "options": [
+                "Un modo per chiamare l'assistenza clienti via telefono",
+                "La capacità del modello di generare JSON strutturato per invocare funzioni esterne",
+                "Un linguaggio di programmazione creato da OpenAI",
+                "Un sistema per tradurre il testo in Python automaticamente"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "Il modello non esegue la funzione, ma 'dice' al sistema quale funzione invocare e con quali argomenti."
+        },
+        {
+            "text": "Quali sono i vantaggi dei sistemi Multi-Agente (es. CrewAI)? (Risposta Multipla)",
+            "options": [
+                "Ogni agente può avere un ruolo e un set di strumenti specifico",
+                "Riducono il costo totale dei token perché i modelli sono più piccoli",
+                "Permettono di risolvere task complessi tramite collaborazione tra specialisti",
+                "Eliminano completamente il rischio di loop infiniti"
+            ],
+            "correct": [
+                "A",
+                "C"
+            ],
+            "answer": "La specializzazione riduce le allucinazioni e permette di affrontare problemi multi-step."
+        },
+        {
+            "text": "Cos'è il pattern ReAct (Reason + Act)?",
+            "options": [
+                "Una libreria Javascript per creare interfacce AI",
+                "Un ciclo iterativo dove il modello scrive il suo ragionamento (Thought) prima di agire (Action)",
+                "Un protocollo di sicurezza per gli agenti",
+                "Un metodo per addestrare i modelli più velocemente"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "ReAct permette al modello di osservare l'output di un'azione e aggiustare il piano di conseguenza."
+        },
+        {
+            "text": "Quale framework è ideale per automazioni AI tramite interfaccia grafica (Low-Code)?",
+            "options": [
+                "LangChain",
+                "OpenClaw",
+                "n8n",
+                "AutoGen"
+            ],
+            "correct": [
+                "C"
+            ],
+            "answer": "n8n permette di creare grafi di automazione trascinando blocchi visivi senza scrivere codice."
+        },
+        {
+            "text": "Caratteristica distintiva di OpenClaw.ai? (Risposta Multipla)",
+            "options": [
+                "Local-First (gira sulla macchina dell'utente prioritizzando la privacy)",
+                "Salva memoria e competenze in file Markdown/YAML locali",
+                "È un servizio a pagamento gestito da Google Cloud",
+                "Può essere controllato tramite app di messaggistica come WhatsApp o Telegram"
+            ],
+            "correct": [
+                "A",
+                "B",
+                "D"
+            ],
+            "answer": "OpenClaw punta sulla privacy locale e l'autonomia tramite interfacce familiari."
+        },
+        {
+            "text": "Perché si usa la 'Summarization Memory' in un orchestratore Enterprise?",
+            "options": [
+                "Perché l'LLM preferisce leggere riassunti corti",
+                "Per risparmiare token nel prompt budget mantenendo il contesto globale della chat",
+                "Perché è obbligatorio per legge sulla privacy",
+                "Per aumentare la velocità di risposta del modello"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "Un modello secondario riassume la storia per non eccedere i limiti di token del modello principale."
+        },
+        {
+            "text": "Rischio principale degli Agenti autonomi in produzione? (Risposta Multipla)",
+            "options": [
+                "Infinite loops (l'agente continua a chiamare tool senza fermarsi)",
+                "Hallucination dei parametri del tool (invia dati sbagliati a una API)",
+                "Che il modello diventi troppo intelligente per essere controllato",
+                "Costi imprevisti dovuti a troppe iterazioni automatiche"
+            ],
+            "correct": [
+                "A",
+                "B",
+                "D"
+            ],
+            "answer": "È fondamentale avere monitoraggio, log e interazione umana ('Human-in-the-loop') per azioni critiche."
+        },
+        {
+            "text": "Cos'è LangGraph?",
+            "options": [
+                "Un database a grafi per salvare i prompt",
+                "Un'estensione di LangChain per creare grafi ciclici stabili e agenti controllati",
+                "Un tool per disegnare diagrammi di flusso",
+                "Un nuovo modello di linguaggio specializzato in matematica"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "LangGraph risolve i limiti delle 'Chain' classiche permettendo cicli e persistenza dello stato."
+        },
+        {
+            "text": "Quale framework eccelle nell'Information Retrieval (RAG) da documenti aziendali?",
+            "options": [
+                "CrewAI",
+                "Microsoft AutoGen",
+                "LlamaIndex",
+                "Stable Diffusion"
+            ],
+            "correct": [
+                "C"
+            ],
+            "answer": "LlamaIndex è specializzato nell'indicizzazione e nel retrieval di dati complessi."
+        }
+    ]
+}
