@@ -1,0 +1,138 @@
+{
+    "questions": [
+        {
+            "text": "Qual è la principale sfida nella valutazione di un sistema generativo rispetto alla classificazione classica?",
+            "options": [
+                "Non esiste una singola 'verità fondamentale' (ground truth) univoca",
+                "I modelli generativi sono troppo veloci",
+                "Mancano i dataset di addestramento",
+                "I costi delle GPU sono troppo bassi"
+            ],
+            "correct": [
+                "A"
+            ],
+            "answer": "Nella generazione di testo possono esistere molte risposte corrette diverse, rendendo difficile il confronto automatico."
+        },
+        {
+            "text": "Cosa misura la metrica 'Faithfulness' nel framework RAGAS?",
+            "options": [
+                "La velocità di risposta del modello",
+                "Se la risposta è derivata esclusivamente dai documenti recuperati, identificando le allucinazioni",
+                "La cortesia del tono usato dall'assistente",
+                "La lunghezza del testo generato"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "La Faithfulness verifica che ogni affermazione sia supportata dal contesto fornito nel prompt."
+        },
+        {
+            "text": "Se un sistema ha una Context Precision del 95% ma una Faithfulness del 20%, dove risiede il problema?",
+            "options": [
+                "Il database vettoriale non trova i dati corretti",
+                "Il problema è nel recupero (Retrieval)",
+                "Il database trova i dati giusti, ma il modello li ignora o allucina nella sintesi",
+                "Bisogna cambiare l'algoritmo di embedding"
+            ],
+            "correct": [
+                "C"
+            ],
+            "answer": "L'alta precisione indica un buon recupero, la bassa fedeltà indica un errore nella fase di generazione."
+        },
+        {
+            "text": "Cos'è l'approccio 'LLM-as-a-Judge'?",
+            "options": [
+                "Un sistema legale gestito interamente da AI",
+                "L'uso di un modello superiore (es. GPT-4o) per valutare e assegnare punteggi alle risposte di modelli più piccoli",
+                "Un protocollo di crittografia per i prompt",
+                "Un modo per addestrare modelli senza GPU"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "Si sfrutta la capacità di ragionamento di modelli avanzati per validare la coerenza e qualità di altri output."
+        },
+        {
+            "text": "Qual è il vantaggio principale di G-Eval?",
+            "options": [
+                "Rende il codice più veloce",
+                "Permette di scalare test qualitativi su migliaia di esempi in pochi minuti",
+                "Sostituisce completamente la necessità di RAG",
+                "Riduce il numero di token necessari per il prompt"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "G-Eval usa criteri strutturati per fornire valutazioni motivate a scala, superando i limiti dei validatori umani."
+        },
+        {
+            "text": "Quale tecnica è più indicata per fornire conoscenza aggiornata quotidianamente a un modello?",
+            "options": [
+                "Fine-Tuning completo",
+                "RAG (Retrieval-Augmented Generation)",
+                "LoRA",
+                "Quantizzazione a 4-bit"
+            ],
+            "correct": [
+                "B"
+            ],
+            "answer": "Il RAG agisce come 'memoria a breve termine' basata su documenti esterni, ideale per dati volatili."
+        },
+        {
+            "text": "Cosa si intende per PEFT (Parameter-Efficient Fine-Tuning)?",
+            "options": [
+                "Tecniche per aggiornare meno dell'1% dei parametri del modello per ridurne i costi di addestramento",
+                "Un nuovo tipo di database vettoriale",
+                "Un metodo per cancellare i dati dal modello",
+                "La scelta del modello più grande disponibile sul mercato"
+            ],
+            "correct": [
+                "A"
+            ],
+            "answer": "Il PEFT permette di adattare modelli giganti aggiornando solo una minima frazione dei pesi."
+        },
+        {
+            "text": "Come funziona la tecnica LoRA (Low-Rank Adaptation)? (Risposta Multipla)",
+            "options": [
+                "I pesi originali del modello vengono 'congelati'",
+                "Si aggiungono piccole matrici di adattamento a basso rango che vengono aggiornate",
+                "Il modello viene ridotto a 1 miliardo di parametri",
+                "Produce file di output ('adapter') leggeri (pochi MB)"
+            ],
+            "correct": [
+                "A",
+                "B",
+                "D"
+            ],
+            "answer": "LoRA evita di riaddestrare l'intero modello, salvando solo le differenze nelle matrici di adattamento."
+        },
+        {
+            "text": "Quando è consigliabile utilizzare il Fine-Tuning rispetto al RAG? (Risposta Multipla)",
+            "options": [
+                "Per insegnare uno stile, un tono di voce specifico o un gergo tecnico estremo",
+                "Per garantire una formattazione rigorosa (es. JSON) con modelli piccoli",
+                "Per inserire i prezzi delle azioni in tempo reale",
+                "Per ridurre latenza e costi usando modelli specialistici da 7B"
+            ],
+            "correct": [
+                "A",
+                "B",
+                "D"
+            ],
+            "answer": "Il Fine-Tuning modifica il comportamento e lo stile, mentre il RAG è per la conoscenza dinamica."
+        },
+        {
+            "text": "Cos'è QLoRA?",
+            "options": [
+                "Una versione di LoRA che usa la quantizzazione a 4-bit per addestrare modelli enormi su GPU consumer",
+                "Un modello di linguaggio creato da Microsoft",
+                "Un database vettoriale open-source",
+                "Un sistema per riassumere i prompt lunghi"
+            ],
+            "correct": [
+                "A"
+            ],
+            "answer": "QLoRA combina efficienza parametrica e quantizzazione per democratizzare l'addestramento di LLM."
+        }
+    ]
+}

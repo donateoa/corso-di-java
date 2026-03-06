@@ -7,6 +7,7 @@ const courses = [
   { id: "cap1", name: "AI Architect - Cap.1: Chiamata LLM", level: "base", json: "./json/cap1.json" },
   { id: "cap2", name: "AI Architect - Cap.2: Contesto e Attention", level: "intermedio", json: "./json/cap2.json" },
   { id: "cap3", name: "AI Architect - Cap.3: Orchestrazione e Agenti", level: "avanzato", json: "./json/cap3.json" },
+  { id: "cap4", name: "AI Architect - Cap.4: Valutazione e Fine-Tuning", level: "avanzato", json: "./json/cap4.json" },
 ];
 
 const state = {
